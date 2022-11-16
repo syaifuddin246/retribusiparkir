@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ManagementUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,8 +26,9 @@ Auth::routes([
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', [HomeController::class,'index'])->name('dashboard');
 });
-Route::middleware('auth','ceklevel:masteradmin')->group(function () {
+Route::middleware('auth','ceklevel:master')->group(function () {
     Route::prefix('admin')->group(function() {
-       
+       Route::resource('/users_management', ManagementUserController::class);
+       Route::patch('/users_management/{id}/editpass',[ManagementUserController::class,'updatepass']);
     });
 });

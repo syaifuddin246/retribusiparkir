@@ -57,9 +57,7 @@
                                         name="level" value="{{ old('level') }}" required autocomplete="level"
                                         placeholder="level user">
                                         <option selected disabled>-- pilih level user --</option>
-
-                                        <option value="anggota">Anggota</option>
-                                        <option value="admin">Admin Web</option>
+                                        <option value="admin">Admin</option>
                                         <option value="master">Admin Master</option>
 
                                     </select>

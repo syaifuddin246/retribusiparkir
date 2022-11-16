@@ -69,8 +69,8 @@
                                             <option selected value="{{ old('level') ? old('level') : $data->level }}">
                                                 {{ old('level') ? old('level') : $data->level }}</option>
 
-                                            <option value="anggota">Anggota</option>
-                                            <option value="admin">Admin Web</option>
+                        
+                                            <option value="admin">Admin</option>
                                             <option value="master">Admin Master</option>
 
                                         </select>
