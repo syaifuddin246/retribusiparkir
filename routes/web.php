@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriItemsController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ParkirInController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,5 +39,6 @@ Route::middleware('auth','ceklevel:master')->group(function () {
 Route::middleware('auth','ceklevel:master,admin')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('/parkir_in', ParkirInController::class);
+        Route::resource('/laporan', ReportController::class);
     });
 });

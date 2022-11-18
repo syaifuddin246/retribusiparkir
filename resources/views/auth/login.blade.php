@@ -55,8 +55,8 @@
                                     <a class="small" href="{{ url('/') }}">
                                         <i class="fas fa-home"></i> Home
                                     </a> | 
-                                    <a class="small" href="{{ route('password.request') }}">
-                                        Forgot Password? Klik Here
+                                    <a class="small" href="#">
+                                        Pemerintah Kabupaten Demak
                                     </a>
                                 </div>
                              @endif

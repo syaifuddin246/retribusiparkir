@@ -38,10 +38,7 @@
     @endif
 
     <!-- Divider -->
-    <hr class="sidebar-divider">
-
-
-
+    {{-- <hr class="sidebar-divider"> --}}
     @if (Auth::user()->level == 'master' || Auth::user()->level == 'admin')
         <!-- Heading -->
         <div class="sidebar-heading">
@@ -51,8 +48,16 @@
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link @yield('parkir-in')" href="{{ url('admin/parkir_in/create') }}">
-                <i class="fas fa-fw fa-in"></i>
+                <i class="fas fa-car-side"></i>
                 <span>Parkir Masuk</span></a>
+        </li>
+        <div class="sidebar-heading">
+            Report
+        </div>
+        <li class="nav-item">
+            <a class="nav-link @yield('laporan')" href="{{ url('admin/laporan') }}">
+                <i class="fas fa-file-alt"></i>
+                <span>Laporan</span></a>
         </li>
     
     @endif

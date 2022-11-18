@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', 'Parkir In - Admin')
+@section('title', 'Parkir In')
 @section('parkir-in', 'active')
 @section('content')
 
@@ -24,7 +24,7 @@
                         <a href="{{ url('/dashboard') }}" class="btn btn-secondary btn-sm"
                             style="float: right; margin-left:2px;"><i class="fa fa-home"></i></a>
                         <a href="{{ url('/admin/parkir_in') }}" class="btn btn-info btn-sm"
-                            style="float: right; margin-left:2px;"><i class="fa fa-save"> List Parkir In</i></a>
+                            style="float: right; margin-left:2px;"><i class="fas fa-list"></i> List Parkir In</a>
                     </div>
                 </div>
             </div>

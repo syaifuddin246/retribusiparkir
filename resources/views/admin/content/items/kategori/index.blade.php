@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', 'Kategori Items - Admin')
+@section('title', 'Kategori Items')
 @section('content-menu', 'show')
 @section('content-kategori-items', 'active')
 @section('content')

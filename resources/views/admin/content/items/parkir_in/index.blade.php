@@ -1,5 +1,5 @@
 @extends('admin.layouts.main')
-@section('title', 'Parkir In - Admin')
+@section('title', 'Parkir In')
 @section('parkir-in', 'active')
 @section('content')
 
@@ -57,7 +57,7 @@
                         <td>Rp.{{number_format($row->kategori->price),2,'.','.'}}</td>
                         <td>
                           <div class="btn-group" role="group" aria-label="Basic-example">
-                            <a href="/admin/parkir_in/{{$row->id}}" target="_blank" class="btn btn-info btn-sm mr-1"><i class="bi bi-eye"></i> Cetak</a>
+                            <a href="/admin/parkir_in/{{$row->id}}" target="_blank" class="btn btn-info btn-sm mr-1"><i class="fas fa-print"></i> Cetak</a>
                           </div>
                         </td>
                         </tr>
