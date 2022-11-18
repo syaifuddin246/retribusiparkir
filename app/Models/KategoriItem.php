@@ -10,4 +10,8 @@ class KategoriItem extends Model
     use HasFactory;
     protected $table = "kategori_items";
     protected $fillable = ['items','price'];
+
+    public function post(){
+        return $this->hasMany(ParkirIn::class);
+    }
 }

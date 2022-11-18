@@ -1,7 +1,6 @@
 @extends('admin.layouts.main')
-@section('title', 'Kategori Items - Admin')
-@section('content-menu', 'show')
-@section('content-kategori-items', 'active')
+@section('title', 'Parkir In - Admin')
+@section('parkir-in', 'active')
 @section('content')
 
     <!-- Begin Page Content -->
@@ -19,49 +18,65 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-4">
-                        <h6 class="m-0 font-weight-bold text-primary">Tambah Data Kategori Items</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Parkir In</h6>
                     </div>
                     <div class="col-md-8">
                         <a href="{{ url('/dashboard') }}" class="btn btn-secondary btn-sm"
                             style="float: right; margin-left:2px;"><i class="fa fa-home"></i></a>
+                        <a href="{{ url('/admin/parkir_in') }}" class="btn btn-info btn-sm"
+                            style="float: right; margin-left:2px;"><i class="fa fa-save"> List Parkir In</i></a>
                     </div>
                 </div>
             </div>
             <div class="card-body">
 
-
                 <div class="card">
-                    <form method="POST" action="{{ url('admin/kategori_items') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ url('admin/parkir_in') }}" enctype="multipart/form-data">
                         @csrf
                         <!-- Name Users -->
                         <div style="padding: 30px;">
                             <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="items" style="padding: 5px;"><b>Nama Kategori Items</b></label>
-                                    <input id="items" type="text"
-                                        class="form-control @error('items') is-invalid @enderror" name="items"
-                                        value="{{ old('items') }}" required autocomplete="items" required
-                                        placeholder="Nama Items...">
+                                <div class="col-md-4">
+                                    <label for="plat" style="padding: 5px;"><b>Plat Kendaraan</b></label>
+                                    <input id="plat" type="text"
+                                        class="form-control @error('plat') is-invalid @enderror" name="plat"
+                                        value="{{ old('plat') }}" required autocomplete="plat" required
+                                        placeholder="Plat Nopol...">
 
-                                    @error('items')
+                                    @error('plat')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="price" style="padding: 5px;"><b>Biaya</b></label>
-                                    <input id="price" type="number"
+                                <div class="col-md-5">
+                                    <label for="kategori" style="padding: 5px; " ><b>Tarif Type Kendaraan</b></label>
+                                    <select id="kategori" type="text" class="form-control @error('kategori') is-invalid @enderror" name="kategori" style="width: 100%; ">
+                                        <option selected disabled>-- Tarif Type Kendaran --</option>
+                                        @foreach ($kategori as $row)
+                                            <option value="{{$row->id}}"> Rp. {{number_format($row->price), 2, '.', '.'}} | {{$row->items}}</option>
+                                        @endforeach
+                                      </select>
+                                    @error('kategori')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                {{-- <div class="col-md-2">
+                                    <label for="price" style="padding: 5px;"><b>Biaya Tarif</b></label>
+                                    <input id="price" type="text"
                                         class="form-control @error('price') is-invalid @enderror" name="price"
                                         value="{{ old('price') }}" required autocomplete="price" required
-                                        placeholder="Price...">
+                                        placeholder="" readonly>
 
                                     @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                </div>
+                                </div> --}}
+                                
                                 <div class="col-md-3" style="padding-top: 42px;">
                                     <button type="submit" class="btn btn-primary w-80" style="float: right">
                                         <i class="fa fa-save"></i><b> Save Data</b>
@@ -77,7 +92,7 @@
 
             </div>
         </div>
-        <div class="card shadow mb-4">
+        {{-- <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-4">
@@ -156,8 +171,27 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
 
 @endsection
+@push('js')
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<style>
+    .select2-container .select2-selection--single{
+        height: 38px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered{
+        line-height: 35px;
+    }
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#kategori').select2({
+        
+        });
+    });
+</script>
+@endpush

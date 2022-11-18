@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriItemsController;
 use App\Http\Controllers\ManagementUserController;
+use App\Http\Controllers\ParkirInController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +33,10 @@ Route::middleware('auth','ceklevel:master')->group(function () {
        Route::resource('/users_management', ManagementUserController::class);
        Route::patch('/users_management/{id}/editpass',[ManagementUserController::class,'updatepass']);
        Route::resource('/kategori_items', KategoriItemsController::class);
+    });
+});
+Route::middleware('auth','ceklevel:master,admin')->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::resource('/parkir_in', ParkirInController::class);
     });
 });

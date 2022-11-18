@@ -50,7 +50,7 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link @yield('parkir-in')" href="{{ url('admin/users_management') }}">
+            <a class="nav-link @yield('parkir-in')" href="{{ url('admin/parkir_in/create') }}">
                 <i class="fas fa-fw fa-in"></i>
                 <span>Parkir Masuk</span></a>
         </li>
