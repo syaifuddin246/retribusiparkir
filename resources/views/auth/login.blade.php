@@ -1,5 +1,5 @@
 @extends('layouts.main')
-@section('title','Parkir-App')
+@section('title','Parkir-App Dinas Pariwisata')
 
 @section('content')
 <div class="col-xl-5 col-lg-12 col-md-9">

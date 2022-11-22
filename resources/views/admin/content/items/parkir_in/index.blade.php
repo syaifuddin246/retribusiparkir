@@ -52,9 +52,10 @@
                         @if (Auth::user()->level == 'master')
                         <td>{{$row->user->name}}</td>
                         @endif
-                        <td>{{$row->updated_at->isoFormat('dddd, D/M/Y, hh:mm')}}</td>
+                        <td>{{$row->updated_at->isoFormat('dddd, D/M/Y, H:mm:ss')}}</td>
                         <td>{{$row->plat}}</td>
-                        <td></td>
+                        <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
+                          height="80px"></td>
                         <td>{{$row->kategori->items}}</td>
                         <td>Rp.{{number_format($row->kategori->price),2,'.','.'}}</td>
                         <td>

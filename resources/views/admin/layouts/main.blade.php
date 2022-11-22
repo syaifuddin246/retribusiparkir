@@ -9,9 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicons -->
-    <link href="{{ asset('Tempo/assets/img/icon.png') }}" rel="icon">
-    <link href="{{ asset('Tempo/assets/img/icon.png') }}" rel="apple-touch-icon">
-
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="icon">
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="apple-touch-icon">
     <title>@yield('title')</title>
   
     <!-- Custom fonts for this template-->
@@ -61,7 +60,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2022</span>
+                        <span>Copyright &copy; Dinas Pariwisata 2022</span>
                     </div>
                 </div>
             </footer>

@@ -6,6 +6,7 @@ use App\Models\KategoriItem;
 use App\Models\ParkirIn;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ParkirInController extends Controller
 {
@@ -49,16 +50,33 @@ class ParkirInController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'kategori' => 'required',
         ]);
+        $img = $request->image;
+        $folderPath = "public/content/parkir_img/";
+        
+        $image_parts = explode(";base64,", $img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName =date('d-m-y').'_'. uniqid() . '.png';
+        
+        $file = $folderPath . $fileName;
+        Storage::put($file, $image_base64);
 
+        // dd('Image uploaded successfully: '.$fileName);
+
+        //
+        // $file = date('d-m-y')."_".time()."_".request()->image->getClientOriginalName();
+        // request()->image->storeAs('public/content/parkirIMG',$file);
         ParkirIn::create([
             'user_id' => Auth::user()->id,
             'kategori_item_id' => $request->kategori,
             'plat' => $request->plat,
             'status' => $request->status,
+            'image' => $fileName,
         ]);
         return redirect('/admin/parkir_in')->with('message','Data Berhasil Disimpan');
     }

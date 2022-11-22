@@ -9,8 +9,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Favicons -->
-    <link href="{{ asset('Tempo/assets/img/icon.png') }}" rel="icon">
-    <link href="{{ asset('Tempo/assets/img/icon.png') }}" rel="apple-touch-icon">
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="icon">
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="apple-touch-icon">
 
     <title>@yield('title')</title>
 
