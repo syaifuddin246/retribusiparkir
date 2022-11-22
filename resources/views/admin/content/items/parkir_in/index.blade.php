@@ -36,13 +36,14 @@
                       <thead style="text-align: center">
                         <tr>
                             @if (Auth::user()->level == 'master')
-                            <th scope="col">Admin Pos</th>
+                            <th scope="col">Petugas</th>
                             @endif
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
+                            <th scope="col">Image Bus</th>
                             <th scope="col">Type Kendaraan</th>
                             <th scope="col">Tarif Biaya</th>
-                            <th scope="col">Aciton</th>
+                            <th scope="col">Action</th>
                         </tr>
                       </thead>
                       <tbody style="text-align: center">
@@ -53,6 +54,7 @@
                         @endif
                         <td>{{$row->updated_at->isoFormat('dddd, D/M/Y, hh:mm')}}</td>
                         <td>{{$row->plat}}</td>
+                        <td></td>
                         <td>{{$row->kategori->items}}</td>
                         <td>Rp.{{number_format($row->kategori->price),2,'.','.'}}</td>
                         <td>

@@ -42,7 +42,7 @@
                         <thead>
                             <tr style="text-align: center">
                                 <th>No</th>
-                                <th>Nama User</th>
+                                <th>Nama Petugas</th>
                                 <th>Email</th>
                                 <th>Level</th>
                                 <th>History</th>

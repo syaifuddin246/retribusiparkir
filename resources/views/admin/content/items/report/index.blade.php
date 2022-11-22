@@ -63,7 +63,7 @@
                     <thead>
                         <tr>
 
-                            <th scope="col">Admin Pos</th>
+                            <th scope="col">Petugas</th>
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
                             <th scope="col">Type Kendaraan</th>
