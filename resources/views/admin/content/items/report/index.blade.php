@@ -59,7 +59,7 @@
                     </div>
 
                 </div>
-                <table id="example" class="display nowrap" style="width:100%">
+                <table id="example" class="display responsive nowrap" style="width:100%">
                     <thead>
                         <tr>
 
@@ -98,6 +98,7 @@
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
     <script src="https://cdn.datatables.net/datetime/1.2.0/js/dataTables.dateTime.min.js"></script>
+
     {{-- script export --}}
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/dataTables.buttons.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
@@ -105,7 +106,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
-
+   
 
     <script>
         var minDate, maxDate;
@@ -141,9 +142,11 @@
                 dom: 'Bfrtip',
                 buttons: [
                     'copy', 'csv', 'excel', 'pdf', 'print'
-                ]
+                ],
+                scrollX: true,
+                responsive: true,
             });
-
+            
 
             // Refilter the table
             $('#min, #max').on('change', function() {
@@ -151,4 +154,5 @@
             });
         });
     </script>
+    
 @endpush

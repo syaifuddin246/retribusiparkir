@@ -25,6 +25,12 @@
     <div class="container position-relative">
       <h1 class="text-home">Parkir-App</h1>
       <h2 class="text-home">Pemerintahan Kabupaten Demak - Dinas Pariwisata</h2>
+      <a href="">
+      <span class="badge bg-secondary"><b style="color: white">Manual Book</b></span>
+      </a>
+      <a href="{{asset('front/assets/document/perda-no-3-tahun-2020.pdf')}}">
+      <span class="badge bg-secondary"><b style="color: white">Perda No 3 Tahun 2022</b></span>
+      </a>
     </div>
 		{{-- <ul class="animation-area box-area">
 			<li></li>

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\KategoriItem;
+use App\Models\ParkirIn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -22,7 +25,7 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
+    {   
         return view('admin.dashboard');
     }
 }
