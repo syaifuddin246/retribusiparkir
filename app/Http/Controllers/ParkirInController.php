@@ -39,7 +39,7 @@ class ParkirInController extends Controller
         $kategori = KategoriItem::all();
         $data = ParkirIn::all();
 
-        return view('admin.content.items.parkir_in.add',compact('kategori','data'));
+        return view('admin.content.items.parkir_in.add3',compact('kategori','data'));
     }
 
     /**
@@ -68,17 +68,24 @@ class ParkirInController extends Controller
 
         // dd('Image uploaded successfully: '.$fileName);
 
-        //
-        // $file = date('d-m-y')."_".time()."_".request()->image->getClientOriginalName();
-        // request()->image->storeAs('public/content/parkirIMG',$file);
-        ParkirIn::create([
+        // ParkirIn::create([
+        //     'user_id' => Auth::user()->id,
+        //     'kategori_item_id' => $request->kategori,
+        //     'plat' => $request->plat,
+        //     'status' => $request->status,
+        //     'image' => $fileName,
+        // ]);
+        $data = ParkirIn::create([
             'user_id' => Auth::user()->id,
             'kategori_item_id' => $request->kategori,
             'plat' => $request->plat,
+            'price' => $request->price,
             'status' => $request->status,
             'image' => $fileName,
-        ]);
-        return redirect('/admin/parkir_in')->with('message','Data Berhasil Disimpan');
+        ])->id;
+        $id = $data;
+        return redirect('/admin/parkir_in/'. $id);
+        // return redirect('/admin/parkir_in')->with('message','Data Berhasil Disimpan');
     }
 
     /**

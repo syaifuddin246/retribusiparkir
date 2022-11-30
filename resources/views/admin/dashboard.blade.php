@@ -16,7 +16,11 @@
         @endif
 
     </div>
-
+    {{-- @foreach ($data as $item)
+    Tahun : {{$item->tahun}}    
+    Bulan : {{$item->bulan}}
+    harga : {{$item->kategori->price}}    
+    @endforeach --}}
 @endsection
 {{-- @push('js')
     <script src="https://code.highcharts.com/highcharts.js"></script>

@@ -188,55 +188,15 @@
         line-height: 35px;
     }
 </style>
-<script type="text/javascript">
-    $(document).ready(function() {
-      $('#kategori').select2({
-        
-        });
-    });
-</script>
+
 {{-- capture --}}
 <!-- Required library for webcam -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script> --}}
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.24/webcam.js"></script>
 <!-- Bootstrap theme -->
-{{-- <script language="JavaScript">
-    // Configure a few settings and attach camera 250x187
-    Webcam.set({
-     width: 350,
-     height: 287,
-     image_format: 'jpeg',
-     jpeg_quality: 90
-    });	 
-    Webcam.attach( '#my_camera' );
-   
-   function take_snapshot() {
-    // play sound effect
-    //shutter.play();
-    // take snapshot and get image data
-    Webcam.snap( function(data_uri) {
-    // display results in page
-    document.getElementById('results').innerHTML = 
-     '<img class="after_capture_frame" src="'+data_uri+'"/>';
-    $("#captured_image_data").val(data_uri);
-    });	 
-   }
 
-   function saveSnap(){
-   var base64data = $("#captured_image_data").val();
-    $.ajax({
-           type: "POST",
-           dataType: "json",
-           url: "/admin/parkir_in",
-           data: {image: base64data},
-           success: function(data) { 
-               alert(data);
-           }
-       });
-   }
-</script> --}}
-
-<script language="JavaScript">
+<script>
+    
     Webcam.set({
         width: 200,
         height: 200,
@@ -252,6 +212,13 @@
             document.getElementById('results').innerHTML = '<img style="width:100%; height:200px;" src="'+data_uri+'"/>';
         } );
     }
-</script>
 
+</script>
+<script type="text/javascript">
+    $(document).ready(function() {
+      $('#kategori').select2({
+        
+        });
+    });
+</script>
 @endpush

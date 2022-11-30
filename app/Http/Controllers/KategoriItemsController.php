@@ -109,4 +109,12 @@ class KategoriItemsController extends Controller
         $data->delete();
         return redirect('admin/kategori_items')->with('message','Data Berhasil Dihapus');
     }
+
+    public function getapi($id){
+        $dt = KategoriItem::find($id);
+
+        return response()->json([
+            'data'=>$dt
+        ]);
+    }
 }

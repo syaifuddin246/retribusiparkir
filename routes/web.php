@@ -46,3 +46,4 @@ Route::middleware('auth','ceklevel:master,admin')->group(function () {
         Route::resource('/laporan', ReportController::class);
     });
 });
+Route::get('/kategori/data/{id}',[KategoriItemsController::class,'getapi']);
