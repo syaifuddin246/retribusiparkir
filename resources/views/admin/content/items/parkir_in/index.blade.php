@@ -40,7 +40,7 @@
                             @endif
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
-                            <th scope="col">Image Bus</th>
+                            {{-- <th scope="col">Image Bus</th> --}}
                             <th scope="col">Type Kendaraan</th>
                             <th scope="col">Tarif Biaya</th>
                             <th scope="col">Action</th>
@@ -54,8 +54,8 @@
                         @endif
                         <td>{{$row->updated_at->isoFormat('dddd, D/M/Y, H:mm:ss')}}</td>
                         <td>{{$row->plat}}</td>
-                        <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
-                          height="80px"></td>
+                        {{-- <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
+                          height="80px"></td> --}}
                         <td>{{$row->kategori->items}}</td>
                         <td>Rp.{{number_format($row->kategori->price),2,'.','.'}}</td>
                         <td>

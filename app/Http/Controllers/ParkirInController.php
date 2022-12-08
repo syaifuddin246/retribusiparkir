@@ -53,18 +53,18 @@ class ParkirInController extends Controller
         $request->validate([
             'kategori' => 'required',
         ]);
-        $img = $request->image;
-        $folderPath = "public/content/parkir_img/";
+        // $img = $request->image;
+        // $folderPath = "public/content/parkir_img/";
         
-        $image_parts = explode(";base64,", $img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
+        // $image_parts = explode(";base64,", $img);
+        // $image_type_aux = explode("image/", $image_parts[0]);
+        // $image_type = $image_type_aux[1];
         
-        $image_base64 = base64_decode($image_parts[1]);
-        $fileName =date('d-m-y').'_'. uniqid() . '.png';
+        // $image_base64 = base64_decode($image_parts[1]);
+        // $fileName =date('d-m-y').'_'. uniqid() . '.png';
         
-        $file = $folderPath . $fileName;
-        Storage::put($file, $image_base64);
+        // $file = $folderPath . $fileName;
+        // Storage::put($file, $image_base64);
 
         // dd('Image uploaded successfully: '.$fileName);
 
@@ -81,7 +81,9 @@ class ParkirInController extends Controller
             'plat' => $request->plat,
             'price' => $request->price,
             'status' => $request->status,
-            'image' => $fileName,
+            'rombongan' => $request->rombongan,
+            'porporasi' => $request->porporasi,
+            // 'image' => $fileName,
         ])->id;
         $id = $data;
         return redirect('/admin/parkir_in/'. $id);

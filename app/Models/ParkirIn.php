@@ -9,7 +9,7 @@ class ParkirIn extends Model
 {
     use HasFactory;
     protected $table = "parkir_in";
-    protected $fillable =['user_id','kategori_item_id','plat','price','status','image'];
+    protected $fillable =['user_id','kategori_item_id','plat','price','status','image','rombongan','porporasi'];
 
     public function kategori(){
         return $this->belongsTo(KategoriItem::class,'kategori_item_id');
