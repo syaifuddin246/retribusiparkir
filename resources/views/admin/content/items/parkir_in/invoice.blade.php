@@ -61,22 +61,37 @@
 <body>
     <div class="container">
         <div class="header" style="margin-bottom: 30px;">
+            @if (Auth::user()->level == 'master')
+            <h2>Pemerintahan Kabupaten Demak</h2>
+            <small>Jalan Kyai Turmudzi Kabupaten Demak
+            </small>
+            @endif
+            @if (Auth::user()->level == 'admintembiring')
             <h2>Tembiring Jogo Indah</h2>
             <small>Jalan Kyai Turmudzi Kabupaten Demak
             </small>
+            @endif
+            @if (Auth::user()->level == 'adminkadilangu')
+            <h2>Kadilangu Jogo Indah</h2>
+            <small>Jalan kadilangu Kabupaten Demak
+            </small>
+            @endif
         </div>
         <hr>
+        No Porporasi : {{$data->porporasi}}
         <div class="flex-container-1">
             <div class="left">
                 <ul>
-                    <li>NoPol</li>
-                    <li>Admin Pos</li>
+                    <li>No Polisi</li>
+                    <li>Rombongan</li>
+                    <li>Petugas Jaga</li>
                     <li>Tanggal</li>
                 </ul>
             </div>
             <div class="right">
                 <ul>
                     <li> {{ $data->plat }} </li>
+                    <li> {{ $data->rombongan }} </li>
                     <li> {{ $data->user->name }} </li>
                     <li> {{ date('Y-m-d : H:i:s', strtotime($data->updated_at)) }} </li>
                 </ul>

@@ -39,7 +39,7 @@
 
     <!-- Divider -->
     {{-- <hr class="sidebar-divider"> --}}
-    @if (Auth::user()->level == 'master' || Auth::user()->level == 'admin')
+    @if (Auth::user()->level == 'master' || Auth::user()->level == 'adminkadilangu' || Auth::user()->level == 'admintembiring')
         <!-- Heading -->
         <div class="sidebar-heading">
             Parkir-App

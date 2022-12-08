@@ -70,7 +70,8 @@
                                                 {{ old('level') ? old('level') : $data->level }}</option>
 
                         
-                                            <option value="admin">Admin</option>
+                                                <option value="admintembiring">Admin Tembiring</option>
+                                                <option value="adminkadilangu">Admin Kadilangu</option>
                                             <option value="master">Admin Master</option>
 
                                         </select>

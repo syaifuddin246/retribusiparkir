@@ -40,7 +40,7 @@ Route::middleware('auth','ceklevel:master')->group(function () {
        Route::resource('/kategori_items', KategoriItemsController::class);
     });
 });
-Route::middleware('auth','ceklevel:master,admin')->group(function () {
+Route::middleware('auth','ceklevel:master,admin,admintembiring,adminkadilangu')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('/parkir_in', ParkirInController::class);
         Route::resource('/laporan', ReportController::class);

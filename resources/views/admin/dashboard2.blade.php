@@ -3,7 +3,7 @@
 @section('menu-dashboard', 'active')
 @section('content')
     <div class="container-fluid">
-        @if (Auth::user()->level == 'admin')
+        @if (Auth::user()->level == 'admin' || Auth::user()->level == 'admintembiring' || Auth::user()->level == 'adminkadilangu')
             <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
                 <strong> Welcome <b>{{Auth::user()->name}}</b> di Portal Web Parkir Kab.
                     Demak !</strong>
