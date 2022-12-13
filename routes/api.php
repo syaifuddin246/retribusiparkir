@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\KategoriController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::middleware(['auth:sanctum'])->group(function (){
     Route::post('/logout',[AuthController::class,'logout']);
+    // kategori
+    Route::get('/kategori',[KategoriController::class,'index']);
+    Route::post('/kategori',[KategoriController::class,'store']);
+    Route::get('/kategori/{id}',[KategoriController::class,'show']);
+    Route::put('/kategori/{id}',[KategoriController::class,'update']);
+    Route::delete('/kategori/{id}',[KategoriController::class,'destroy']);
 });
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
