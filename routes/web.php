@@ -43,6 +43,7 @@ Route::middleware('auth','ceklevel:master')->group(function () {
 Route::middleware('auth','ceklevel:master,admin,admintembiring,adminkadilangu')->group(function () {
     Route::prefix('admin')->group(function () {
         Route::resource('/parkir_in', ParkirInController::class);
+        Route::get('/laporan/cetak',[ReportController::class,'cetak_laporan']);
         Route::resource('/laporan', ReportController::class);
     });
 });

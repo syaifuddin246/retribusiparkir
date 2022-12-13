@@ -39,7 +39,7 @@ class ParkirInController extends Controller
         $kategori = KategoriItem::all();
         $data = ParkirIn::all();
 
-        return view('admin.content.items.parkir_in.add3',compact('kategori','data'));
+        return view('admin.content.items.parkir_in.add',compact('kategori','data'));
     }
 
     /**

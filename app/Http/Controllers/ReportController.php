@@ -17,32 +17,51 @@ class ReportController extends Controller
      */
     public function index()
     {
-        //
-        $kategori = KategoriItem::all();
-        if (request()->start_date || request()->end_date) {
-            $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
-            $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
-            if (Auth::user()->level == 'master'){
-                $data = ParkirIn::whereBetween('updated_at',[$start_date,$end_date])->get();
-            }else{
-                $data = ParkirIn::whereBetween('updated_at',[$start_date,$end_date])->where('user_id',Auth::user()->id)->get();
-            }
-        } else {
-            if (Auth::user()->level == 'master'){
-                $data = ParkirIn::all();
-            }else{
-                $data = ParkirIn::all()->where('user_id',Auth::user()->id);
-            }
-        }
-        // if (Auth::user()->level == 'master'){
-        //     $data = ParkirIn::all();
-        // }else{
-        //     $data = ParkirIn::all()->where('user_id',Auth::user()->id);
-        // }
         
-
-        return view('admin.content.items.report.index',compact('kategori','data'));
+        // $kategori = KategoriItem::all();
+        if (Auth::user()->level == 'master'){
+            $data = ParkirIn::all();
+        }else{
+            // $data = ParkirIn::all()->where('user_id',Auth::user()->id);
+            $data = ParkirIn::select('*')->where('user_id',Auth::user()->id)->get();
+        }
+        // if (request()->start_date || request()->end_date) {
+        //     $start_date = Carbon::parse(request()->start_date)->toDateTimeString();
+        //     $end_date = Carbon::parse(request()->end_date)->toDateTimeString();
+        //     if (Auth::user()->level == 'master'){
+        //         $data = ParkirIn::whereBetween('updated_at',[$start_date,$end_date])->get();
+        //     }else{
+        //         $data = ParkirIn::whereBetween('updated_at',[$start_date,$end_date])->where('user_id',Auth::user()->id)->get();
+        //     }
+        // } else {
+        //     if (Auth::user()->level == 'master'){
+        //         $data = ParkirIn::all();
+        //     }else{
+        //         $data = ParkirIn::all()->where('user_id',Auth::user()->id);
+        //     }
+        // }
+       
+        
+        return view('admin.content.items.report.index',compact('data'));
     }
+
+    public function cetak_laporan(Request $request){
+        $tgl_mulai = $request->tgl_mulai;
+        $tgl_selesai = $request->tgl_selesai;
+        
+        if ($tgl_mulai AND $tgl_selesai) {
+            # code...
+            if (Auth::user()->level == 'master'){
+                $data = ParkirIn::select('*')->whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->get();
+                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->sum('price');
+               
+            }else{
+                $data = ParkirIn::select('*')->whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->where('user_id',Auth::user()->id)->get();
+                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->where('user_id',Auth::user()->id)->sum('price');
+            }
+        } 
+        return view('admin.content.items.report.laporan',compact('data','sum_total','tgl_mulai','tgl_selesai'));
+     }
 
     /**
      * Show the form for creating a new resource.

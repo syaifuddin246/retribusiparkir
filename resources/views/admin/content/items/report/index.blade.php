@@ -28,30 +28,22 @@
                 </div>
             </div>
             <div class="card-body">
-
-                {{-- <table border="0" cellspacing="5" cellpadding="5" class="">
-                    <tbody>
-                        <tr>
-                            <td>Minimum date:</td>
-                            <td><input type="text" id="min" name="min" placeholder="--select date--"></td>
-                        </tr>
-                        <tr>
-                            <td>Maximum date:</td>
-                            <td><input type="text" id="max" name="max" placeholder="--select date--"></td>
-                        </tr>
-                    </tbody>
-                </table> --}}
                 <div class="my-2">
                     <div class="row">
                         <div class="col-md-6">
-                            <form action="/admin/laporan" method="GET">
+                            {{-- <form action="/admin/laporan" method="GET">
                                 <div class="input-group mb-3">
 
-                                    <input type="date" class="form-control" name="start_date">
-                                    <input type="date" class="form-control" name="end_date">
+                                    <input type="date" class="form-control" id="start_date" name="start_date" value="start_date">
+                                    <input type="date" class="form-control" id= "end_date" name="end_date" value="end_date">
                                     <button class="btn btn-outline-dark btn-sm" type="submit">Tampilkan</button>
                                 </div>
-                            </form>
+                            </form> --}}
+                            <button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#modalCetak">
+                                <i class="fa fa-print"></i>
+                                Cetak Laporan
+                            </button>
+                            
                         </div>
                         <div class="col-md-6">
 
@@ -75,20 +67,59 @@
                             <tr>
 
                                 <td>{{ $row->user->name }}</td>
-                                <td>{{ $row->updated_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
+                                <td>{{ $row->created_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
+                                {{-- <td>{{ $row->updated_at->isoFormat('D/M/Y, hh:mm') }}</td> --}}
+                                {{-- <td>{{ $row->updated_at}}</td> --}}
                                 <td>{{ $row->plat }}</td>
                                 <td>{{ $row->kategori->items }}</td>
-                                <td>Rp.{{ number_format($row->kategori->price), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->kategori->price), 2, '.', '.' }}</td>
 
                             </tr>
                         @endforeach
+                    <tfoot>
+                        <tr>
+                            <th colspan="4" style="text-align:right"></th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
                     </tbody>
+
 
                 </table>
             </div>
         </div>
     </div>
+    <!-- Modal Cetak -->
+<div class="modal fade" id="modalCetak" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-s">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cetak Laporan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{url('admin/laporan/cetak')}}" method="get" target="_blank" enctype="multipart/form-data">
+                {{-- @csrf --}}
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Tanggal Mulai</label>
+                    <input type="date" class="form-control" name="tgl_mulai" required>
+                </div>
+                <div class="form-group">
+                    <label>Tanggal Selesai</label>
+                    <input type="date" class="form-control" name="tgl_selesai" required>
+                </div>
+            </div>
 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>Close</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i>Cetak Laporan</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 @push('js')
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
@@ -106,47 +137,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
-   
+
 
     <script>
-        var minDate, maxDate;
-        $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-                var min = minDate.val();
-                var max = maxDate.val();
-                var date = new Date(data[1]);
-
-                if (
-                    (min === null && max === null) ||
-                    (min === null && date <= max) ||
-                    (min <= date && max === null) ||
-                    (min <= date && date <= max)
-                ) {
-                    return true;
-                }
-                return false;
-            }
-        );
-
+      
+            
         $(document).ready(function() {
-            // Create date inputs
-            minDate = new DateTime($('#min'), {
-                format: 'MMMM Do YYYY'
-            });
-            maxDate = new DateTime($('#max'), {
-                format: 'MMMM Do YYYY'
-            });
-
+          
             // DataTables initialisation
             var table = $('#example').DataTable({
                 dom: 'Bfrtip',
+                // buttons: [
+                //     'copy', 'csv', 'excel', 'pdf', 'print'
+                // ],
                 buttons: [
-                    'copy', 'csv', 'excel', 'pdf', 'print'
+            
+                    {
+                        extend: 'excelHtml5',
+                        footer: true
+                    },
+                  
                 ],
                 scrollX: true,
                 responsive: true,
+
+
+                footerCallback: function(row, data, start, end, display) {
+                    var api = this.api();
+                    
+                    // Remove the formatting to get integer data for summation
+                    var intVal = function(i) {
+                        return typeof i === 'string' ? i.replace(/[\$,]/g, '') * 1 : typeof i ===
+                            'number' ? i : 0;
+                    };
+
+                    // Total over all pages
+                    total = api
+                        .column(4)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+
+                    // Total over this page
+                    pageTotal = api
+                        .column(4, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    
+
+                    // Update footer
+                    // $(api.column(4).footer()).html('Total :' + pageTotal);
+                    $(api.column(4).footer()).html('Total : ' + pageTotal);
+                
+                },
             });
-            
+
 
             // Refilter the table
             $('#min, #max').on('change', function() {
@@ -154,5 +204,4 @@
             });
         });
     </script>
-    
 @endpush
