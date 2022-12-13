@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\ParkirController;
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,8 @@ Route::middleware(['auth:sanctum'])->group(function (){
     // data parkir
     Route::get('/parkir_in',[ParkirController::class,'index']);
     Route::post('/parkir_in',[ParkirController::class,'store']);
+    // report list
+    Route::get('/laporan',[ReportController::class,'index']);
 });
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);

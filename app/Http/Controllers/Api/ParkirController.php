@@ -15,7 +15,7 @@ class ParkirController extends Controller
         if (Auth::user()->level == 'master'){
             $data = ParkirIn::with('kategori')->latest()->paginate(6);
         }else{
-            $data = ParkirIn::with('kategori')->where('user_id',Auth::user()->id)->latest(6);
+            $data = ParkirIn::with('kategori')->where('user_id',Auth::user()->id)->latest()->paginate(6);
         }
 
         return response()->json([
