@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\KategoriController;
+use App\Http\Controllers\Api\ParkirController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,9 @@ Route::middleware(['auth:sanctum'])->group(function (){
     Route::get('/kategori/{id}',[KategoriController::class,'show']);
     Route::put('/kategori/{id}',[KategoriController::class,'update']);
     Route::delete('/kategori/{id}',[KategoriController::class,'destroy']);
+    // data parkir
+    Route::get('/parkir_in',[ParkirController::class,'index']);
+    Route::post('/parkir_in',[ParkirController::class,'store']);
 });
 Route::post('/register',[AuthController::class,'register']);
 Route::post('/login',[AuthController::class,'login']);
