@@ -113,8 +113,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-undo"></i>Close</button>
-                <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i>Cetak Laporan</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fa fa-back"></i> Batal</button>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i> Cetak Laporan</button>
             </div>
             </form>
         </div>

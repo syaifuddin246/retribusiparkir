@@ -59,6 +59,11 @@ class KategoriItemsController extends Controller
     public function show($id)
     {
         //
+        $data = KategoriItem::find($id);
+        // dd($data);
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**

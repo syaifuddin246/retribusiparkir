@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\KategoriItem;
 use App\Models\ParkirIn;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -68,6 +69,14 @@ class HomeController extends Controller
         ->orderBy('created_at', 'ASC')
         ->pluck('bulan'); 
 
+        // total income per user
+        // $total_income_users = ParkirIn::select([
+        //     DB::raw('CAST(SUM(price) as int) as total_income_users'),
+        // ])
+        // ->whereYear('created_at', $th)
+        // ->GroupBy(DB::raw("user_id"))
+        // ->pluck('total_income_users');
+        // dd($total_income_users);
         // return view('admin.dashboard');
         return view('admin.dashboard2',compact('data','bulan','th','th_income','total_income'));
     }

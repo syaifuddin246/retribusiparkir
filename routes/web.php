@@ -45,6 +45,7 @@ Route::middleware('auth','ceklevel:master,admin,admintembiring,adminkadilangu')-
         Route::resource('/parkir_in', ParkirInController::class);
         Route::get('/laporan/cetak',[ReportController::class,'cetak_laporan']);
         Route::resource('/laporan', ReportController::class);
+        Route::get('/kategori/items/{id}', [KategoriItemsController::class,'show']);
     });
 });
 Route::get('/kategori/data/{id}',[KategoriItemsController::class,'getapi']);

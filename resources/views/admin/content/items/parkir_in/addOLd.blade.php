@@ -36,7 +36,7 @@
                         @csrf
                         <!-- Name Users -->
                         <div style="padding: 15px;">
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
 
                                 <div class="col-md-3" style="text-align: center; margin-top:6%;">
                                     <input type="button" class="btn btn-primary" value="Take Snapshot"
@@ -50,10 +50,9 @@
                                 <div class="col-md-4">
                                     <div id="results">Preview...</div>
                                 </div>
-                            </div>
-                            <hr>
+                            </div> --}}
                             <div class="row mb-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="plat" style="padding: 5px;"><b>Plat Kendaraan</b></label>
                                     <input id="plat" type="text"
                                         class="form-control @error('plat') is-invalid @enderror" name="plat"
@@ -66,7 +65,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <label for="kategori" style="padding: 5px; "><b>Tarif Type Kendaraan</b></label>
                                     <select id="kategori" type="text"
                                         class="form-control @error('kategori') is-invalid @enderror" name="kategori"
@@ -83,26 +82,70 @@
                                         </span>
                                     @enderror
                                 </div>
-                                {{-- <div class="col-md-2">
-                                    <label for="status" style="padding: 5px;"><b>Tarif</b></label>
+                                <div class="col-md-2">
+                                    <label for="price" style="padding: 5px;"><b>Tarif</b></label>
+                                    {{-- <input type="text" id="price"> --}}
+                                    <input id="price" type="text" class="form-control text-center" name="price"
+                                        value="{{ old('price') }}" required autocomplete="price" readonly>
 
-                                    <input id="price" type="text" class="form-control text-center" name="status"
-                                        value="{{ old('status') }}" required autocomplete="status" readonly>
-
-                                    @error('status')
+                                    @error('price')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
 
-                                </div> --}}
-
+                                </div>
                                 <div class="col-md-3" style="padding-top: 42px;">
                                     <button type="submit" class="btn btn-outline-primary w-80" style="float: right" >
                                         <i class="fa fa-save" ></i><b> Save & Print</b>
                                     </button>
                                 </div>
 
+                            </div>
+                            <hr>
+                            <span><h6 style="font-size: 10px;"><b>informasi lainnya...</b></h6></span>
+                            <div class="row mb-3">
+                                {{-- <div class="col-md-3">
+                                    <label for="plat" style="padding: 5px;"><b>Plat Kendaraan</b></label>
+                                    <input id="plat" type="text"
+                                        class="form-control @error('plat') is-invalid @enderror" name="plat"
+                                        value="{{ old('plat') }}" required autocomplete="plat" required
+                                        placeholder="Nopol...">
+
+                                    @error('plat')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div> --}}
+                              
+                                <div class="col-md-8">
+                                    <label for="rombongan" style="padding: 5px;"><b>Asal Kota Rombongan</b></label>
+                                    <input id="rombongan" type="text"
+                                        class="form-control @error('rombongan') is-invalid @enderror" name="rombongan"
+                                        value="{{ old('rombongan') }}" autocomplete="rombongan" 
+                                        placeholder="Asal Rombongan...">
+
+                                    @error('rombongan')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="porporasi" style="padding: 5px;"><b>Nomor Tiket Porporasi</b></label>
+                                    <input id="porporasi" type="text"
+                                        class="form-control @error('porporasi') is-invalid @enderror" name="porporasi"
+                                        value="{{ old('porporasi') }}" required autocomplete="porporasi" required
+                                        placeholder="No Tiket Porporasi...">
+
+                                    @error('porporasi')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                               
                             </div>
 
                         </div>
@@ -114,21 +157,7 @@
         </div>
 
     </div>
-    {{-- <form action="" id="myform">
-        <input type="submit" value="">
-    </form> --}}
-
-    {{-- <form>
-        <select name="kategori" onChange="tampil(this.value)">
-            @foreach ($kategori as $item)
-                <option value="{{ $item->id }}"> Rp.
-                    {{ number_format($item->price), 2, '.', '.' }} | {{ $item->items }}</option>
-            @endforeach
-        </select>
-    </form> --}}
-
-    {{-- <div id="price"></div> --}}
-
+  
 @endsection
 @push('js')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -144,10 +173,10 @@
         }
     </style>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script> --}}
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.24/webcam.js"></script>
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.24/webcam.js"></script> --}}
     <!-- Bootstrap theme -->
 
-    <script>
+    {{-- <script>
         Webcam.set({
             width: 200,
             height: 200,
@@ -164,7 +193,7 @@
                     data_uri + '"/>';
             });
         }
-    </script>
+    </script> --}}
     <script type="text/javascript">
         $(document).ready(function() {
             $('#kategori').select2({
@@ -177,11 +206,23 @@
             let data = "";
             switch (kategori) {
                 case "1": {
-                    data = 190000;
+                    data = 150000;
                 }
                 break;
             case "2": {
-                data = 90000;
+                data = 75000;
+            }
+            break;
+            case "3": {
+                data = 45000;
+            }
+            break;
+            case "4": {
+                data = 15000;
+            }
+            break;
+            case "5": {
+                data = 3000;
             }
             break;
             default:

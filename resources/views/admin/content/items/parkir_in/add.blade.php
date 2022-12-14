@@ -68,8 +68,8 @@
                                 <div class="col-md-4">
                                     <label for="kategori" style="padding: 5px; "><b>Tarif Type Kendaraan</b></label>
                                     <select id="kategori" type="text"
-                                        class="form-control @error('kategori') is-invalid @enderror" name="kategori"
-                                        onChange="tampil(this.value)" style="width: 100%; " required>
+                                        class="form-control kategori-items @error('kategori') is-invalid @enderror" name="kategori"
+                                        style="width: 100%; " required>
                                         <option selected disabled>-- Tarif Type Kendaran --</option>
                                         @foreach ($kategori as $row)
                                             <option value="{{ $row->id }}"> Rp.
@@ -105,20 +105,6 @@
                             <hr>
                             <span><h6 style="font-size: 10px;"><b>informasi lainnya...</b></h6></span>
                             <div class="row mb-3">
-                                {{-- <div class="col-md-3">
-                                    <label for="plat" style="padding: 5px;"><b>Plat Kendaraan</b></label>
-                                    <input id="plat" type="text"
-                                        class="form-control @error('plat') is-invalid @enderror" name="plat"
-                                        value="{{ old('plat') }}" required autocomplete="plat" required
-                                        placeholder="Nopol...">
-
-                                    @error('plat')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div> --}}
-                              
                                 <div class="col-md-8">
                                     <label for="rombongan" style="padding: 5px;"><b>Asal Kota Rombongan</b></label>
                                     <input id="rombongan" type="text"
@@ -201,79 +187,22 @@
             });
         });
     </script>
-    <script type="text/javascript">
-        function tampil(kategori) {
-            let data = "";
-            switch (kategori) {
-                case "1": {
-                    data = 150000;
-                }
-                break;
-            case "2": {
-                data = 75000;
-            }
-            break;
-            case "3": {
-                data = 45000;
-            }
-            break;
-            case "4": {
-                data = 15000;
-            }
-            break;
-            case "5": {
-                data = 3000;
-            }
-            break;
-            default:
-                data = "";
-            }
-            document.getElementById('price').value = data;
-        }
-    </script>
-
-    {{-- <script>
-        $('#myform').submit(function(event){
-            
-    event.preventDefault();
-});
-    </script> --}}
-    
-    
-    {{-- <script type="text/javascript">
-        $(document).ready(function() {
-            $('#kategori').select2({
-
-            })
-        });
+    {{-- autofill --}}
+   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
+   <script>
+       $('.kategori-items').on('change', (event) => {
+           getData(event.target.value).then(data => {
+             $('#price').val(data.data.price);
+           });
+       });
         
-        $('#kategori').on('change', (event) => {
-            getBarang(event.target.value).then(data => {
-                $('#kategori').val(data.price);
-            });
-        });
-        async function getBarang(id) {
-            let response = await fetch('/kategori/data/' + id)
-            let data = await response.json();
-
-            return data;
-        }
-    </script> --}}
-
-    {{-- <script>
-    console.info('tes')
-</script> --}}
-    {{-- <script>
-        $('#kategori').on('change', (event) => {
-            getBarang(event.target.value).then(data => {
-                $('#harga').val(data.price);
-            });
-        });
-        async function getBarang(id) {
-            let response = await fetch('/kategori/data/' + id)
-            let data = await response.json();
-
-            return data;
-        }
-    </script> --}}
+       async function getData(id) {
+        //    let response = await fetch('/admin/kategori_items/' + id);
+           let response = await fetch('/admin/kategori/items/' + id);
+           let data = await response.json();
+         //   console.info(data.data.price);
+           return data;
+       }
+     // console.info('tes');
+   </script>
 @endpush
