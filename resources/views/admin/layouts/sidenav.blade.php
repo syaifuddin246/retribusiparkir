@@ -10,11 +10,14 @@
     </a>
 
     <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+    {{-- <hr class="sidebar-divider my-0"> --}}
     <!-- Nav Item - Dashboard -->
-    
+    <hr class="sidebar-divider">
     @if (Auth::user()->level == 'master')
     <li class="nav-item">
+        <div class="sidebar-heading">
+            Master Data
+        </div>
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
             aria-expanded="true" aria-controls="collapseTwo">
             <i class="fas fa-fw fa-folder"></i>
@@ -24,7 +27,7 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Content</h6>
-                <a class="collapse-item @yield('content-kategori-items')" href="{{ url('admin/kategori_items') }}">Kategori Items</a>
+                <a class="collapse-item @yield('content-kategori-items')" href="{{ url('admin/kategori_items') }}">Kategori Bus</a>
             </div>
         </div>
     </li>         
@@ -39,7 +42,7 @@
 
     <!-- Divider -->
     {{-- <hr class="sidebar-divider"> --}}
-    @if (Auth::user()->level == 'master' || Auth::user()->level == 'adminkadilangu' || Auth::user()->level == 'admintembiring')
+    @if (Auth::user()->level == 'adminkadilangu' || Auth::user()->level == 'admintembiring')
         <!-- Heading -->
         <div class="sidebar-heading">
             Parkir-App
@@ -51,6 +54,9 @@
                 <i class="fas fa-car-side"></i>
                 <span>Parkir Masuk</span></a>
         </li>
+        
+        @endif
+    <hr class="sidebar-divider">
         <div class="sidebar-heading">
             Report
         </div>
@@ -59,8 +65,6 @@
                 <i class="fas fa-file-alt"></i>
                 <span>Laporan</span></a>
         </li>
-    
-    @endif
     @if (Auth::user()->level == 'master')
         <!-- Divider -->
         <hr class="sidebar-divider">

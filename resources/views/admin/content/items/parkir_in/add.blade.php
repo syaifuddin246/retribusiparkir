@@ -31,11 +31,12 @@
             <div class="card-body">
 
                 <div class="card">
+                    <a href="{{url('admin/parkir_in/create')}}"><span class="badge bg-dark p-2"><b style="color: aliceblue"><i class="fas fa-sync-alt"></i> Refresh Page</b></span></a>
                     <form method="POST" action="{{ url('admin/parkir_in') }}" target="_blank"
-                        enctype="multipart/form-data" >
-                        @csrf
-                        <!-- Name Users -->
-                        <div style="padding: 15px;">
+                    enctype="multipart/form-data" >
+                    @csrf
+                    <!-- Name Users -->
+                    <div style="padding: 15px;">
                             {{-- <div class="row mb-3">
 
                                 <div class="col-md-3" style="text-align: center; margin-top:6%;">

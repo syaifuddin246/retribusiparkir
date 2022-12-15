@@ -10,7 +10,31 @@ use Illuminate\Support\Facades\Auth;
 
 class ParkirController extends Controller
 {
-    //
+    /**
+     * @OA\Get(
+     *     path="/api/parkir_in",
+     *     tags={"Tiketin Parkir"},
+     *     summary="Get All Data Parkir Masuk",
+     *     security={{"Bearer":{}}},
+     *     @OA\RequestBody(
+     *         description="Data Parkir",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="successful operation",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="Invalid status value"
+     *     ),
+     * )
+     */
     public function index(){
         if (Auth::user()->level == 'master'){
             $data = ParkirIn::with('kategori')->latest()->paginate(6);
@@ -25,6 +49,70 @@ class ParkirController extends Controller
         // dd('cek');
     }
 
+    // tambah data
+     /**
+     * @OA\Post(
+     *     path="/api/parkir_in",
+     *     tags={"Tiketin Parkir"},
+     *     summary="Add Data Parkir",
+     *     security={{"Bearer":{}}},
+     *  @OA\Parameter(
+     *      name="kategori",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="number"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="plat",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="price",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="rombongan",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="porporasi",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *)
+     **/
     public function store(Request $request){
         
          $data = KategoriItem::all();

@@ -29,7 +29,8 @@
                         <tr>
                             <td align="left">
                                 <span style="line-height: 1.6; font-weight:bold;">
-                                    REKAP - <?php echo date('F Y'); ?> <br> 
+                                    {{-- Rekapan Bulan <?php echo date('F Y'); ?> <br>  --}}
+                                    Rekapan <?php echo date('j F Y'); ?> <br> 
                                     @if (Auth::user()->level == 'master')
                                     <h2>Pemerintahan Kabupaten Demak</h2>
                                     <small>Jalan Kyai Turmudzi Kabupaten Demak

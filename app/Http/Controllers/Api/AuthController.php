@@ -11,6 +11,64 @@ use Illuminate\Validation\Rules\Password;
 class AuthController extends Controller
 {
     //
+    //register
+    //  /**
+    //  * @OA\Post(
+    //  ** path="/api/register",
+    //  *   tags={"Auth"},
+    //  *   summary="Register",
+    //  *   operationId="register",
+    //  *
+    //  *  @OA\Parameter(
+    //  *      name="name",
+    //  *      in="query",
+    //  *      required=true,
+    //  *      @OA\Schema(
+    //  *           type="string"
+    //  *      )
+    //  *   ),
+    //  *  @OA\Parameter(
+    //  *      name="email",
+    //  *      in="query",
+    //  *      required=true,
+    //  *      @OA\Schema(
+    //  *           type="string"
+    //  *      )
+    //  *   ),
+    //  *   @OA\Parameter(
+    //  *      name="password",
+    //  *      in="query",
+    //  *      required=true,
+    //  *      @OA\Schema(
+    //  *           type="string"
+    //  *      )
+    //  *   ),
+    //  *      @OA\Parameter(
+    //  *      name="password_confirmation",
+    //  *      in="query",
+    //  *      required=true,
+    //  *      @OA\Schema(
+    //  *           type="string"
+    //  *      )
+    //  *   ),
+    //  *   @OA\Response(
+    //  *      response=201,
+    //  *       description="Success",
+    //  *      @OA\MediaType(
+    //  *           mediaType="application/json",
+    //  *      )
+    //  *   ),
+    //  *   @OA\Response(
+    //  *      response=401,
+    //  *       description="Unauthenticated"
+    //  *   ),
+    //  *   @OA\Response(
+    //  *      response=400,
+    //  *      description="Bad Request"
+    //  *   )
+    //  *)
+    //  **/
+   
     public function register(Request $request){
         $request->validate([
             'name' => 'required',
@@ -32,6 +90,55 @@ class AuthController extends Controller
             'token' => $token
         ],200);
     }
+     // login
+    /**
+     * @OA\Post(
+     ** path="/api/login",
+     *   tags={"Auth"},
+     *   summary="Login",
+     *   operationId="login",
+     *
+     *   @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Unauthenticated"
+     *   ),
+     *   @OA\Response(
+     *      response=400,
+     *      description="Bad Request"
+     *   ),
+     *   @OA\Response(
+     *      response=404,
+     *      description="not found"
+     *   ),
+     *      @OA\Response(
+     *          response=403,
+     *          description="Forbidden"
+     *      )
+     *)
+     **/
     public function login(Request $request){
         $request->validate([
             'email' => 'required',
@@ -57,6 +164,23 @@ class AuthController extends Controller
             // dd('tidak ada data');
         }
     }
+    // logout 
+    /**
+     * @OA\Post(
+     *     path="/api/logout",
+     *     tags={"Auth"},
+     *     summary="Logout",
+     *     operationId="Logout",
+     *     security={{"Bearer":{}}},
+    *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     * )
+     */
     public function logout(){
         auth()->user()->tokens()->delete();
 
