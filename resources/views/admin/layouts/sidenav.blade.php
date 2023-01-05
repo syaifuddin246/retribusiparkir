@@ -32,12 +32,12 @@
         </div>
     </li>         
     @else
-    <li class="nav-item">
-            <a href="{{url('/dashboard')}}" class="nav-link @yield('menu-dashboard')">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span>
-            </a> 
-        </li>
+        {{-- <li class="nav-item">
+                <a href="{{url('/dashboard')}}" class="nav-link @yield('menu-dashboard')">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a> 
+            </li> --}}
     @endif
 
     <!-- Divider -->

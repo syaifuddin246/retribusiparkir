@@ -31,12 +31,13 @@
             <div class="card-body">
 
                 <div class="card">
-                    <a href="{{url('admin/parkir_in/create')}}"><span class="badge bg-dark p-2"><b style="color: aliceblue"><i class="fas fa-sync-alt"></i> Refresh Page</b></span></a>
+                    <a href="{{ url('admin/parkir_in/create') }}"><span class="badge bg-dark p-2"><b
+                                style="color: aliceblue"><i class="fas fa-sync-alt"></i> Refresh Page</b></span></a>
                     <form method="POST" action="{{ url('admin/parkir_in') }}" target="_blank"
-                    enctype="multipart/form-data" >
-                    @csrf
-                    <!-- Name Users -->
-                    <div style="padding: 15px;">
+                        enctype="multipart/form-data">
+                        @csrf
+                        <!-- Name Users -->
+                        <div style="padding: 15px;">
                             {{-- <div class="row mb-3">
 
                                 <div class="col-md-3" style="text-align: center; margin-top:6%;">
@@ -69,8 +70,8 @@
                                 <div class="col-md-4">
                                     <label for="kategori" style="padding: 5px; "><b>Tarif Type Kendaraan</b></label>
                                     <select id="kategori" type="text"
-                                        class="form-control kategori-items @error('kategori') is-invalid @enderror" name="kategori"
-                                        style="width: 100%; " required>
+                                        class="form-control kategori-items @error('kategori') is-invalid @enderror"
+                                        name="kategori" style="width: 100%; " required>
                                         <option selected disabled>-- Tarif Type Kendaran --</option>
                                         @foreach ($kategori as $row)
                                             <option value="{{ $row->id }}"> Rp.
@@ -97,20 +98,22 @@
 
                                 </div>
                                 <div class="col-md-3" style="padding-top: 42px;">
-                                    <button type="submit" class="btn btn-outline-primary w-80" style="float: right" >
-                                        <i class="fa fa-save" ></i><b> Save & Print</b>
+                                    <button type="submit" class="btn btn-outline-primary w-80" style="float: right">
+                                        <i class="fa fa-save"></i><b> Save & Print</b>
                                     </button>
                                 </div>
 
                             </div>
                             <hr>
-                            <span><h6 style="font-size: 10px;"><b>informasi lainnya...</b></h6></span>
+                            <span>
+                                <h6 style="font-size: 10px;"><b>informasi lainnya...</b></h6>
+                            </span>
                             <div class="row mb-3">
                                 <div class="col-md-8">
                                     <label for="rombongan" style="padding: 5px;"><b>Asal Kota Rombongan</b></label>
                                     <input id="rombongan" type="text"
                                         class="form-control @error('rombongan') is-invalid @enderror" name="rombongan"
-                                        value="{{ old('rombongan') }}" autocomplete="rombongan" 
+                                        value="{{ old('rombongan') }}" autocomplete="rombongan"
                                         placeholder="Asal Rombongan...">
 
                                     @error('rombongan')
@@ -132,7 +135,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                               
+
                             </div>
 
                         </div>
@@ -144,7 +147,7 @@
         </div>
 
     </div>
-  
+
 @endsection
 @push('js')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -189,21 +192,21 @@
         });
     </script>
     {{-- autofill --}}
-   {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
-   <script>
-       $('.kategori-items').on('change', (event) => {
-           getData(event.target.value).then(data => {
-             $('#price').val(data.data.price);
-           });
-       });
-        
-       async function getData(id) {
-        //    let response = await fetch('/admin/kategori_items/' + id);
-           let response = await fetch('/admin/kategori/items/' + id);
-           let data = await response.json();
-         //   console.info(data.data.price);
-           return data;
-       }
-     // console.info('tes');
-   </script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
+    <script>
+        $('.kategori-items').on('change', (event) => {
+            getData(event.target.value).then(data => {
+                $('#price').val(data.data.price);
+            });
+        });
+
+        async function getData(id) {
+            //    let response = await fetch('/admin/kategori_items/' + id);
+            let response = await fetch('/admin/kategori/items/' + id);
+            let data = await response.json();
+            //   console.info(data.data.price);
+            return data;
+        }
+        // console.info('tes');
+    </script>
 @endpush

@@ -36,7 +36,8 @@ class HomeController extends Controller
         // ])
         // // ->groupBy(['bulan','tahun'])->get()->toArray();
         // ->groupBy(['bulan','tahun',])->get();
-        // // dd($data);
+        // // dd($data); 
+
         if ($request->tahun) {
             $th = $request->tahun;
         } else {
@@ -96,6 +97,10 @@ class HomeController extends Controller
         // ->pluck('total_income_users');
         // dd($total_income_users);
         // return view('admin.dashboard');
-        return view('admin.dashboard2',compact('namauser','data2','data','bulan','th','th_income','total_income'));
+        if(Auth::user()->level == 'master'){
+            return view('admin.dashboard2',compact('namauser','data2','data','bulan','th','th_income','total_income'));
+        }else{
+            return redirect('admin/parkir_in/create');
+        }
     }
 }
