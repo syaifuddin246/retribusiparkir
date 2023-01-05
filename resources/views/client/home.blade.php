@@ -25,7 +25,7 @@
     <div class="container position-relative">
       <h1 class="text-home">Parkir-App</h1>
       <h2 class="text-home">Pemerintahan Kabupaten Demak - Dinas Pariwisata</h2>
-      <a href="">
+      <a href="{{asset('front/assets/document/manual-book-parkir-app.pdf')}}">
       <span class="badge bg-secondary"><b style="color: white">Manual Book</b></span>
       </a>
       <a href="{{asset('front/assets/document/perda-no-3-tahun-2020.pdf')}}">

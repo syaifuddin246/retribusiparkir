@@ -76,10 +76,26 @@
                 <i class="fas fa-fw fa-users"></i>
                 <span>Management Users</span></a>
         </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading">
+            Logs Activity
+        </div>
+        <li class="nav-item">
+            <a class="nav-link @yield('log-activity')" href="{{ url('admin/logs_activity') }}">
+                <i class="fas fa-fw fa-pen"></i>
+                <span>Logs Activity</span></a>
+        </li>
     @endif
      <!-- Divider -->
-     <hr class="sidebar-divider my-0">
+     <hr class="sidebar-divider my-0 pt-4">
     <!-- Sidebar Toggler (Sidebar) -->
+    <div class="sidebar-heading">
+        Logout
+    </div>
+    <li class="nav-item">
+        <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> <span>Keluar System</span></a>
+    </li>
     <div class="text-center d-none d-md-inline pt-4">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>

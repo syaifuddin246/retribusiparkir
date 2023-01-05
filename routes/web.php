@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriItemsController;
 use App\Http\Controllers\ManagementUserController;
 use App\Http\Controllers\ParkirInController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\LogActivityController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,7 @@ Route::middleware('auth','ceklevel:master')->group(function () {
        Route::resource('/users_management', ManagementUserController::class);
        Route::patch('/users_management/{id}/editpass',[ManagementUserController::class,'updatepass']);
        Route::resource('/kategori_items', KategoriItemsController::class);
+       Route::get('/logs_activity',[LogActivityController::class,'logActivity']);
     });
 });
 Route::middleware('auth','ceklevel:master,admin,admintembiring,adminkadilangu')->group(function () {
