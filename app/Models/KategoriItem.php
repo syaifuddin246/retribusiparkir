@@ -14,4 +14,10 @@ class KategoriItem extends Model
     public function post(){
         return $this->hasMany(ParkirIn::class);
     }
+    public function post2(){
+        return $this->hasMany(ParkTembiring::class);
+    }
+    public function post3(){
+        return $this->hasMany(ParkKadilangu::class);
+    }
 }

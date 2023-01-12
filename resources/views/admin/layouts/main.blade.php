@@ -90,7 +90,7 @@
                 </div>
                 <div class="modal-body">Apakah Anda Yakin Ingin Keluar Dari Akun Ini ?</div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" aria-label="Close">Tidak</button>
                     <a class="btn btn-primary" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class="bi bi-box-arrow-right"></i>

@@ -7,7 +7,8 @@
     <link rel="icon" href="/assets/img/logo.png" type="image/x-icon"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="icon">
+    <link href="{{asset('front/assets/img/logodemak.png')}}" rel="apple-touch-icon">
     <title>Laporan</title>
   </head>
 
@@ -29,23 +30,21 @@
                         <tr>
                             <td align="left">
                                 <span style="line-height: 1.6; font-weight:bold;">
-                                    {{-- Rekapan Bulan <?php echo date('F Y'); ?> <br>  --}}
-                                    Rekapan <?php echo date('j F Y'); ?> <br> 
+                                   {{-- Rekapan Bulan <?php echo date('F Y'); ?> <br>  --}}
+                                   <h6 style="float: right; font-size:12px;"> Rekapan <?php echo date('j F Y'); ?> </h6>
                                     @if (Auth::user()->level == 'master')
-                                    <h2>Pemerintahan Kabupaten Demak</h2>
-                                    <small>Jalan Kyai Turmudzi Kabupaten Demak
-                                    </small>
+                                    <h4><img src="{{asset('front/assets/img/logodemak.png')}}" alt=""style="width:2%;"> Dinas Pariwista Demak</h4>
+                                    {{-- <small>Jalan Kyai Turmudzi Kabupaten Demak
+                                    </small> --}}
                                     @endif
                                     @if (Auth::user()->level == 'admintembiring')
-                                    <h2>Tembiring Jogo Indah</h2>
-                                    <small>Jalan Kyai Turmudzi Kabupaten Demak
-                                    </small>
+                                    <h4>Tembiring Jogo Indah</h4>
+                                    
                                     @endif
                                     @if (Auth::user()->level == 'adminkadilangu')
-                                    <h2>Kadilangu Jogo Indah</h2>
-                                    <small>Jalan kadilangu Kabupaten Demak
-                                    </small>
+                                    <h4>Kadilangu Jogo Indah</h4>
                                     @endif
+                                     
                                 </span>
                             </td>
                         </tr>
@@ -85,7 +84,7 @@
                        
                             <tr class="text-center">
                                 <td colspan="4">Nominal Total</td>
-                                <td>Rp. {{number_format($sum_total)}}</td>
+                                <td>Rp. {{number_format($sum_total)}},-</td>
                             </tr>
                         
                     </table>

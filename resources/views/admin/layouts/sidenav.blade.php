@@ -15,6 +15,13 @@
     <hr class="sidebar-divider">
     @if (Auth::user()->level == 'master')
     <li class="nav-item">
+                <a href="{{url('/dashboard')}}" class="nav-link @yield('menu-dashboard')">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a> 
+            </li>
+    <li class="nav-item">
+        
         <div class="sidebar-heading">
             Master Data
         </div>
@@ -27,7 +34,8 @@
             data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Content</h6>
-                <a class="collapse-item @yield('content-kategori-items')" href="{{ url('admin/kategori_items') }}">Kategori Bus</a>
+                <a class="collapse-item @yield('content-kategori-items')" href="{{ url('admin/kategori_items') }}">Kategori Retribusi</a>
+                <a class="collapse-item @yield('req-delete')" href="{{ url('admin/request_delete') }}">Request Delete Data</a>
             </div>
         </div>
     </li>         

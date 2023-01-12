@@ -60,7 +60,7 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script type="text/javascript">
         let pendapatan = <?php echo json_encode($data); ?>;
-        let pendapatan2 = <?php echo json_encode($data2); ?>;
+        let pendapatantembiring = <?php echo json_encode($data2); ?>;
         let namauser = <?php echo json_encode($namauser); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
         let incometahun = <?php echo json_encode($total_income); ?>;
@@ -99,6 +99,39 @@
             ]
 
         });
+
+        // tembiring
+        Highcharts.chart('grafik', {
+            title: {
+                text: 'Grafik Pendapatan Bulanan All Parkir'
+            },
+            xAxis: {
+                categories: bulan
+            },
+            yAxis: {
+                title: {
+                    text: 'Nominal Pendapatan Bulanan'
+                }
+            },
+            plotOptions: {
+                series: {
+                    allowPointSelect: true
+                }
+            },
+            series: [{
+                    name: 'Total',
+                    colorByPoint: true,
+                    data: pendapatantembiring
+
+                },
+                {
+                    name: 'Total Tahunan : Rp.' + ribuan
+                }
+            ]
+
+        });
+        // end tembiring
+
         // count per user
         // Highcharts.chart('grafik-alluser', {
         //     chart: {

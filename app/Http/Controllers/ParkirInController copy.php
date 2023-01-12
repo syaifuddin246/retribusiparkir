@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\KategoriItem;
 use App\Models\ParkirIn;
-use App\Models\ParkTembiring;
-use App\Models\ParkKadilangu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -23,14 +21,9 @@ class ParkirInController extends Controller
         $kategori = KategoriItem::all();
         if (Auth::user()->level == 'master'){
             $data = ParkirIn::select('*')->latest()->paginate(8);
+        }else{
+            $data = ParkirIn::select('*')->where('user_id',Auth::user()->id)->latest()->paginate(8);
         }
-        if (Auth::user()->level == 'admintembiring'){
-            $data = ParkTembiring::select('*')->where('user_id',Auth::user()->id)->latest()->paginate(8);
-        }
-        if (Auth::user()->level == 'adminkadilangu'){
-            $data = ParkKadilangu::select('*')->where('user_id',Auth::user()->id)->latest()->paginate(8);
-        }
-        
 
         return view('admin.content.items.parkir_in.index',compact('kategori','data'));
     }
@@ -92,32 +85,6 @@ class ParkirInController extends Controller
             'porporasi' => $request->porporasi,
             // 'image' => $fileName,
         ])->id;
-        if(Auth::user()->level == 'admintembiring'){
-            $data = ParkTembiring::create([
-                'user_id' => Auth::user()->id,
-                'kategori_item_id' => $request->kategori,
-                'plat' => $request->plat,
-                'price' => $request->price,
-                'status' => $request->status,
-                'rombongan' => $request->rombongan,
-                'porporasi' => $request->porporasi,
-                // 'image' => $fileName,
-            ])->id;
-        }elseif(Auth::user()->level == 'adminkadilangu'){
-            $data = ParkKadilangu::create([
-                'user_id' => Auth::user()->id,
-                'kategori_item_id' => $request->kategori,
-                'plat' => $request->plat,
-                'price' => $request->price,
-                'status' => $request->status,
-                'rombongan' => $request->rombongan,
-                'porporasi' => $request->porporasi,
-                // 'image' => $fileName,
-            ])->id;
-        }else{
-            dd('notfound');
-        }
-
         $id = $data;
         return redirect('/admin/parkir_in/'. $id);
         // return redirect('/admin/parkir_in')->with('message','Data Berhasil Disimpan');
@@ -135,14 +102,9 @@ class ParkirInController extends Controller
         //
         if (Auth::user()->level == 'master'){
             $data = ParkirIn::find($id);
-        }elseif (Auth::user()->level == 'admintembiring'){
-                $data = ParkTembiring::select('*')->whereId($id)->where('user_id',Auth::user()->id)->firstOrFail();
-        }elseif(Auth::user()->level == 'adminkadilangu'){
-                $data = ParkKadilangu::select('*')->whereId($id)->where('user_id',Auth::user()->id)->firstOrFail();
         }else{
-            dd('notfound');
+            $data = ParkirIn::select('*')->whereId($id)->where('user_id',Auth::user()->id)->firstOrFail();
         }
-        
 
         return view('admin.content.items.parkir_in.invoice',compact('data'));
     }
@@ -176,35 +138,8 @@ class ParkirInController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function reqdelete()
-    {
-        //
-        $kategori = KategoriItem::all();
-        if (Auth::user()->level == 'master'){
-            $data = ParkirIn::select('*')->latest()->paginate(8);
-            $data2 = ParkTembiring::select('*')->latest()->paginate(8);
-            $data3 = ParkKadilangu::select('*')->latest()->paginate(8);
-        }
-
-        return view('admin.content.items.reqdelete.index',compact('kategori','data','data2','data3'));
-    }
     public function destroy($id)
     {
         //
-        if($data = ParkirIn::find($id) != null){
-            $data = ParkirIn::find($id);
-            $data->delete();
-        }elseif($data2 = ParkTembiring::find($id) != null){
-            $data2 = ParkTembiring::find($id);
-            $data2->delete();
-        }elseif($data3 = ParkKadilangu::find($id) != null){
-            $data3 = ParkKadilangu::find($id);
-            $data3->delete();
-        }else{
-            dd('notfound');
-        }
-
-        return redirect('/admin/request_delete')->with('message','Data Berhasil Dihapus');
     }
-   
 }

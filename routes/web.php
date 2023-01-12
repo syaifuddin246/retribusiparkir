@@ -40,6 +40,8 @@ Route::middleware('auth','ceklevel:master')->group(function () {
        Route::patch('/users_management/{id}/editpass',[ManagementUserController::class,'updatepass']);
        Route::resource('/kategori_items', KategoriItemsController::class);
        Route::get('/logs_activity',[LogActivityController::class,'logActivity']);
+       Route::get('/request_delete',[ParkirInController::class,'reqdelete']);
+       Route::delete('/request_delete/{id}',[ParkirInController::class,'delete1']);
     });
 });
 Route::middleware('auth','ceklevel:master,admin,admintembiring,adminkadilangu')->group(function () {
