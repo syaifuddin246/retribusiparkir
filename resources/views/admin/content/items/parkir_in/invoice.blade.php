@@ -97,26 +97,37 @@
         </div>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
             <div class="m-right" style="text-align: left;">Tanggal</div>
-            <div>{{$data->created_at}}</div>
+            <div><b style="font-size:12px;">{{$data->created_at}}</b></div>
             <div></div>
         </div>
         <hr>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
-            <div class="m-right" style="text-align: left;">Type Kendaraan</div>
+            <div class="m-right" style="text-align: left;">Type</div>
             <div>{{$data->kategori->items}}</div>
             <div></div>
         </div>
         <div class="flex-container" style="text-align: right;">
-            <div class="m-right" style="text-align: left;">Tarif Biaya</div>
-            <div>Rp.<b>{{ number_format($data->kategori->price) }}</b>,- </div>
+            <div class="m-right" style="text-align: left;">Tarif Parkir</div>
+            <div>Rp.{{ number_format($data->price) }},- </div>
+            <div></div>
+        </div> 
+        <div class="flex-container" style="text-align: right;">
+            <div class="m-right" style="text-align: left;">Kebersihan</div>
+            <div>{{ number_format($data->price2) }},- </div>
+            <div></div>
+        </div> 
+        <hr>
+        <div class="flex-container" style="text-align: right;">
+            <div class="m-right" style="text-align: left;">Total Bayar</div>
+            <div>Rp.<b>{{ number_format($data->total) }}</b>,- </div>
             <div></div>
         </div> 
         <hr>
         <div class="left" style="padding-top:12px;">
             <ul style="font-size: 11px;">
-                <li><b>PERBUP KABUPATEN DEMAK <br> NOMOR 40 TAHUN 2020</b></li>
+                <li><b>PERBUP KABUPATEN DEMAK <br> NOMOR 38 DAN 40 TAHUN 2020 </b></li>
                 <li><b>*Periksa kembali tiket anda untuk jumlah <br>retribusi yang dibayarkan</b></li>
-                <li><b>*Simpan tiket sebagai tanda bukti masuk <br>kawasan wisata religi</b></li>
+                <li><b>*Simpan tiket sebagai tanda bukti masuk <br>kawasan wisata religi Demak</b></li>
             </ul>
         </div>
         <div style="margin-top: 10px; text-align:center">

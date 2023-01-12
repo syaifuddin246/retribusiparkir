@@ -9,7 +9,7 @@ class ParkKadilangu extends Model
 {
     use HasFactory;
     protected $table = "parkir_kadilangu";
-    protected $fillable =['user_id','kategori_item_id','plat','price','status','image','rombongan','porporasi','created_at'];
+    protected $fillable =['user_id','kategori_item_id','plat','price','price2','total','status','image','rombongan','porporasi','created_at'];
 
     public function kategori(){
         return $this->belongsTo(KategoriItem::class,'kategori_item_id');

@@ -59,7 +59,7 @@
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
                             <th scope="col">Type Kendaraan</th>
-                            <th scope="col">Tarif Biaya</th>
+                            <th scope="col">Total Bayar</th>
                             @if (Auth::user()->level == 'master')
                             <th scope="col">Level Pos Jaga</th>
                             @endif
@@ -75,7 +75,7 @@
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
                                 <td>{{ $row->plat }}</td>
                                 <td>{{ $row->kategori->items }}</td>
-                                <td>{{ number_format($row->kategori->price), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->total), 2, '.', '.' }}</td>
                                 @if (Auth::user()->level == 'master')
                                 <td>{{ $row->user->level }}</td>
                                 @endif

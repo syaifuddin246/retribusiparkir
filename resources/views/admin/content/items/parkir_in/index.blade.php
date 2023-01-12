@@ -42,7 +42,7 @@
                                 <th scope="col">Plat Kendaraan</th>
                                 {{-- <th scope="col">Image Bus</th> --}}
                                 <th scope="col">Type Kendaraan</th>
-                                <th scope="col">Tarif Biaya</th>
+                                <th scope="col">Total Bayar</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -57,7 +57,7 @@
                                     {{-- <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
                           height="80px"></td> --}}
                                     <td>{{ $row->kategori->items }}</td>
-                                    <td>Rp.{{ number_format($row->kategori->price), 2, '.', '.' }}</td>
+                                    <td>Rp.{{ number_format($row->total), 2, '.', '.' }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic-example">
                                             <a href="/admin/parkir_in/{{ $row->id }}" target="_blank"

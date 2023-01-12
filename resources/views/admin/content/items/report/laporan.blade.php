@@ -38,11 +38,11 @@
                                     </small> --}}
                                     @endif
                                     @if (Auth::user()->level == 'admintembiring')
-                                    <h4>Tembiring Jogo Indah</h4>
+                                    <h4><img src="{{asset('front/assets/img/logodemak.png')}}" alt=""style="width:2%;"> Tembiring Jogo Indah</h4>
                                     
                                     @endif
                                     @if (Auth::user()->level == 'adminkadilangu')
-                                    <h4>Kadilangu Jogo Indah</h4>
+                                    <h4><img src="{{asset('front/assets/img/logodemak.png')}}" alt=""style="width:2%;"> Kadilangu Jogo Indah</h4>
                                     @endif
                                      
                                 </span>
@@ -51,7 +51,7 @@
                     </table>
                     <hr class="line-title">
                     <p align="center">
-                       <b>LAPORAN TIKETING</b> <br>
+                       <b>LAPORAN RETRIBUSI</b> <br>
                         <?php echo date('j/m/Y - H:i'); ?> - By ( <b>{{Auth::user()->name}}</b> )
                     </p>
                     <p align="center">
@@ -66,7 +66,7 @@
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
                             <th scope="col">Type Kendaraan</th>
-                            <th scope="col">Tarif Biaya</th>
+                            <th scope="col">Total Bayar</th>
                         </tr>
                         @foreach ($data as $key => $row)
                             <tr style="text-align: center">
@@ -77,7 +77,7 @@
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
                                 <td>{{ $row->plat }}</td>
                                 <td>{{ $row->kategori->items }}</td>
-                                <td>{{ number_format($row->kategori->price), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->total), 2, '.', '.' }}</td>
 
                             </tr>
                         @endforeach

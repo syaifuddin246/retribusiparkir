@@ -53,11 +53,11 @@ class ReportController extends Controller
             # code...
             if (Auth::user()->level == 'master'){
                 $data = ParkirIn::select('*')->whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->get();
-                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->sum('price');
+                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->sum('total');
                
             }else{
                 $data = ParkirIn::select('*')->whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->where('user_id',Auth::user()->id)->get();
-                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->where('user_id',Auth::user()->id)->sum('price');
+                $sum_total = ParkirIn::whereBetween('created_at',[$tgl_mulai." 00:00:00",$tgl_selesai." 23:59:59"])->where('user_id',Auth::user()->id)->sum('total');
             }
         } 
         return view('admin.content.items.report.laporan',compact('data','sum_total','tgl_mulai','tgl_selesai'));
