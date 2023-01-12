@@ -42,7 +42,7 @@ class HomeController extends Controller
         ->get();
 
         $data = ParkirIn::select([
-            DB::raw('CAST(SUM(price) as int) as total'),
+            DB::raw('SUM(total) as total'),
             // DB::raw('user_id as user'),
             DB::raw('MONTHNAME(created_at) as bulan'),
             DB::raw('EXTRACT(YEAR from created_at) as tahun'),
@@ -53,7 +53,7 @@ class HomeController extends Controller
         ->pluck('total');
         // dd($data);
         $total_income = ParkirIn::select([
-            DB::raw('CAST(SUM(price) as int) as total_income'),
+            DB::raw('SUM(total) as total_income'),
         ])
         ->whereYear('created_at', $th)
         ->GroupBy(DB::raw("YEAR(created_at)"))
@@ -75,7 +75,7 @@ class HomeController extends Controller
         ->get();
 
         $data2 = ParkTembiring::select([
-            DB::raw('CAST(SUM(price) as int) as total'),
+            DB::raw('SUM(total) as total'),
             // DB::raw('user_id as user'),
             DB::raw('MONTHNAME(created_at) as bulan'),
             DB::raw('EXTRACT(YEAR from created_at) as tahun'),
@@ -85,14 +85,14 @@ class HomeController extends Controller
         ->orderBy('created_at', 'ASC')
         ->pluck('total');
         
-        $total_income = ParkTembiring::select([
-            DB::raw('CAST(SUM(price) as int) as total_income'),
+        $total_income2 = ParkTembiring::select([
+            DB::raw('SUM(total) as total_income'),
         ])
         ->whereYear('created_at', $th)
         ->GroupBy(DB::raw("YEAR(created_at)"))
         ->pluck('total_income');
            
-        $bulan = ParkTembiring::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        $bulan2 = ParkTembiring::select(DB::raw("MONTHNAME(created_at) as bulan"))
         ->whereYear('created_at', $th)
         ->GroupBy(DB::raw("MONTHNAME(created_at)"))
         ->orderBy('created_at', 'ASC')
@@ -107,7 +107,7 @@ class HomeController extends Controller
         ->get();
 
         $data3 = ParkKadilangu::select([
-            DB::raw('CAST(SUM(price) as int) as total'),
+            DB::raw('SUM(total) as total'),
             // DB::raw('user_id as user'),
             DB::raw('MONTHNAME(created_at) as bulan'),
             DB::raw('EXTRACT(YEAR from created_at) as tahun'),
@@ -117,14 +117,14 @@ class HomeController extends Controller
         ->orderBy('created_at', 'ASC')
         ->pluck('total');
         
-        $total_income = ParkKadilangu::select([
-            DB::raw('CAST(SUM(price) as int) as total_income'),
+        $total_income3 = ParkKadilangu::select([
+            DB::raw('SUM(total) as total_income'),
         ])
         ->whereYear('created_at', $th)
         ->GroupBy(DB::raw("YEAR(created_at)"))
         ->pluck('total_income');
            
-        $bulan = ParkKadilangu::select(DB::raw("MONTHNAME(created_at) as bulan"))
+        $bulan3 = ParkKadilangu::select(DB::raw("MONTHNAME(created_at) as bulan"))
         ->whereYear('created_at', $th)
         ->GroupBy(DB::raw("MONTHNAME(created_at)"))
         ->orderBy('created_at', 'ASC')
@@ -132,7 +132,7 @@ class HomeController extends Controller
         
         // end Kadilangu
         if(Auth::user()->level == 'master'){
-            return view('admin.dashboard',compact('data3','data2','data','bulan','th','th_income','total_income'));
+            return view('admin.dashboard',compact('data3','data2','data','bulan','bulan2','bulan3','th','th_income','total_income','total_income2','total_income3'));
         }else{
             return redirect('admin/parkir_in/create');
         }

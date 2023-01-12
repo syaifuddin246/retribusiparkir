@@ -7,12 +7,13 @@
             Auth::user()->level == 'admintembiring' ||
             Auth::user()->level == 'adminkadilangu')
             <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                <strong> Welcome <b>{{ Auth::user()->name }}</b> di Portal Web Parkir Kab.
+                <strong> Welcome <b>{{ Auth::user()->name }}</b> di Portal Retribusi Wisata Kab.
                     Demak !</strong>
             </div>
         @else
             <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
-                <strong> Welcome <b>{{ Auth::user()->name }}</b> Portal Web Parkir App !</strong>
+                <strong> Welcome <b>{{ Auth::user()->name }}</b> Portal Retribusi Wisata Kab.
+                    Demak ! !</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -129,11 +130,23 @@
         let pendapatantembiring = <?php echo json_encode($data2); ?>;
         let pendapatankadilangu = <?php echo json_encode($data3); ?>;
         let bulan = <?php echo json_encode($bulan); ?>;
+        let bulan2 = <?php echo json_encode($bulan2); ?>;
+        let bulan3 = <?php echo json_encode($bulan3); ?>;
         let incometahun = <?php echo json_encode($total_income); ?>;
+        let incometahun2 = <?php echo json_encode($total_income2); ?>;
+        let incometahun3 = <?php echo json_encode($total_income3); ?>;
         // convert bilangan
         let reverse = incometahun.toString().split('').reverse().join(''),
-            ribuan = reverse.match(/\d{1,3}/g);
-        ribuan = ribuan.join('.').split('').reverse().join('');
+            total = reverse.match(/\d{1,3}/g);
+        total = total.join('.').split('').reverse().join('');
+        // toal tembiring
+        let reverse2 = incometahun2.toString().split('').reverse().join(''),
+            total2 = reverse2.match(/\d{1,3}/g);
+        total2 = total2.join('.').split('').reverse().join('');
+        // total kadilangu
+        let reverse3 = incometahun3.toString().split('').reverse().join(''),
+            total3 = reverse3.match(/\d{1,3}/g);
+        total3 = total3.join('.').split('').reverse().join('');
 
 
         Highcharts.chart('grafik', {
@@ -160,7 +173,7 @@
 
                 },
                 {
-                    name: 'Total Tahunan : Rp.' + ribuan
+                    name: 'Total Tahunan : Rp.' + total
                 }
             ]
 
@@ -172,7 +185,7 @@
                 text: 'Grafik Pendapatan Bulanan Tembiring'
             },
             xAxis: {
-                categories: bulan
+                categories: bulan2
             },
             yAxis: {
                 title: {
@@ -191,7 +204,7 @@
 
                 },
                 {
-                    name: 'Total Tahunan : Rp.' + ribuan
+                    name: 'Total Tahunan : Rp.' + total2
                 }
             ]
 
@@ -204,7 +217,7 @@
                 text: 'Grafik Pendapatan Bulanan Kadilangu'
             },
             xAxis: {
-                categories: bulan
+                categories: bulan3
             },
             yAxis: {
                 title: {
@@ -223,7 +236,7 @@
 
                 },
                 {
-                    name: 'Total Tahunan : Rp.' + ribuan
+                    name: 'Total Tahunan : Rp.' + total3
                 }
             ]
 
