@@ -41,11 +41,13 @@ class KategoriItemsController extends Controller
         $request->validate([
             'items' => 'required',
             'price' => 'required',
+            'price2' => 'required',
         ]);
 
         KategoriItem::create([
             'items' => $request->items,
             'price' => $request->price,
+            'price2' => $request->price2,
         ]);
         return redirect('admin/kategori_items')->with('message','Data Berhasil Ditambahkan');
     }
@@ -92,11 +94,13 @@ class KategoriItemsController extends Controller
         $request->validate([
             'items' => 'required',
             'price' => 'required',
+            'price2' => 'required',
         ]);
         $data = KategoriItem::find($id);
         $data->update([
             'items' => $request->items,
             'price' => $request->price,
+            'price2' => $request->price2,
         ]);
         return redirect('admin/kategori_items')->with('message','Data Berhasil Diperbarui');
     }

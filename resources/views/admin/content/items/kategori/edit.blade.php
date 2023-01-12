@@ -38,7 +38,7 @@
                               @enderror
                           </div>
                           <div class="col-md-3">
-                              <label for="price" style="padding: 5px;"><b>Biaya</b></label>
+                              <label for="price" style="padding: 5px;"><b>Biaya Parkir</b></label>
                               <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{ old('price') ? old('price') : $data->price }}" required autocomplete="price" required placeholder="...">
 
                               @error('price')
@@ -47,9 +47,19 @@
                                   </span>
                               @enderror
                           </div>
-                          <div class="col-md-3" style="padding-top: 42px;">
+                          <div class="col-md-3">
+                              <label for="price2" style="padding: 5px;"><b>Biaya Kebersihan</b></label>
+                              <input id="price2" type="text" class="form-control @error('price2') is-invalid @enderror" name="price2" value="{{ old('price2') ? old('price2') : $data->price2 }}" required autocomplete="price2" required placeholder="...">
+
+                              @error('price2')
+                                  <span class="invalid-feedback" role="alert">
+                                      <strong>{{ $message }}</strong>
+                                  </span>
+                              @enderror
+                          </div>
+                          <div class="col-md-2" style="padding-top: 42px;">
                             <button type="submit" class="btn btn-primary w-80">
-                                <i class="fa fa-save"></i><b> Save Data</b>
+                                <b> Save Data</b>
                             </button>
                           </div>
                          

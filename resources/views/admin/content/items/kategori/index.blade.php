@@ -36,8 +36,8 @@
                         <!-- Name Users -->
                         <div style="padding: 30px;">
                             <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="items" style="padding: 5px;"><b>Nama Kategori Items</b></label>
+                                <div class="col-md-4">
+                                    <label for="items" style="padding: 5px;"><b>Kategori Kendaraan</b></label>
                                     <input id="items" type="text"
                                         class="form-control @error('items') is-invalid @enderror" name="items"
                                         value="{{ old('items') }}" required autocomplete="items" required
@@ -50,7 +50,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="price" style="padding: 5px;"><b>Biaya</b></label>
+                                    <label for="price" style="padding: 5px;"><b>Biaya Parkir</b></label>
                                     <input id="price" type="number"
                                         class="form-control @error('price') is-invalid @enderror" name="price"
                                         value="{{ old('price') }}" required autocomplete="price" required
@@ -62,9 +62,22 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="col-md-3" style="padding-top: 42px;">
+                                <div class="col-md-3">
+                                    <label for="price2" style="padding: 5px;"><b>Biaya Kebersihan</b></label>
+                                    <input id="price2" type="number"
+                                        class="form-control @error('price2') is-invalid @enderror" name="price2"
+                                        value="{{ old('price2') }}" required autocomplete="price2" required
+                                        placeholder="Price...">
+
+                                    @error('price2')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-2" style="padding-top: 42px;">
                                     <button type="submit" class="btn btn-primary w-80" style="float: right">
-                                        <i class="fa fa-save"></i><b> Save Data</b>
+                                        <b> Save Data</b>
                                     </button>
                                 </div>
 
@@ -93,6 +106,7 @@
                                 <th>No</th>
                                 <th>Nama Kategori Items</th>
                                 <th>Biaya Parkir</th>
+                                <th>Biaya Kebersihan</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -105,6 +119,7 @@
                                     <td>{{ $no++ }}</td>
                                     <td>{{ $row->items }}</td>
                                     <td>{{ number_format($row->price), 2, '.', '.' }}</td>
+                                    <td>{{ number_format($row->price2), 2, '.', '.' }}</td>
                                     <td>
                                         <div class="btn-group" role="group" aria-label="Basic-example">
 

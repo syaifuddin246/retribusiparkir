@@ -9,7 +9,7 @@ class KategoriItem extends Model
 {
     use HasFactory;
     protected $table = "kategori_items";
-    protected $fillable = ['items','price'];
+    protected $fillable = ['items','price','price2'];
 
     public function post(){
         return $this->hasMany(ParkirIn::class);
