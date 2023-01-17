@@ -1,5 +1,13 @@
 @extends('admin.layouts.main')
-@section('title', 'Laporan')
+@if (Auth::user()->level == 'master')
+@section('title', 'Laporan Pemkab Demak ')
+@elseif(Auth::user()->level == 'admintembiring')
+@section('title', 'Laporan Tembiring Jogo Indah ')
+@elseif(Auth::user()->level =='admikadilangu')
+@section('title', 'Laporan Kadilangu Jogo Indah ')
+@else
+                    
+@endif
 @section('Laporan', 'active')
 @section('content')
 
@@ -18,7 +26,16 @@
             <div class="card-header py-3">
                 <div class="row">
                     <div class="col-md-4">
-                        <h6 class="m-0 font-weight-bold text-primary">Laporan</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Laporan  @if (Auth::user()->level == 'master')
+                        Pemkab Demak
+                    @elseif(Auth::user()->level == 'admintembiring')
+                        Tembiring Jogo Indah
+                    @elseif(Auth::user()->level =='admikadilangu')
+                        Kadilangu Jogo Indah
+                    @else
+                    
+                    @endif
+                    </h6>
                     </div>
                     <div class="col-md-8">
 
@@ -59,13 +76,15 @@
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
                             <th scope="col">Type Kendaraan</th>
-                            <th scope="col">Total Bayar</th>
+                            <th scope="col">Parkir</th>
+                            <th scope="col">Kebersihan</th>
                             @if (Auth::user()->level == 'master')
                             <th scope="col">Level Pos Jaga</th>
                             @endif
                         </tr>
                     </thead>
                     <tbody>
+                        
                         @foreach ($data as $key => $row)
                             <tr>
 
@@ -73,9 +92,14 @@
                                 <td>{{ $row->created_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
                                 {{-- <td>{{ $row->updated_at->isoFormat('D/M/Y, hh:mm') }}</td> --}}
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
+                                @if ($row->plat != null)
                                 <td>{{ $row->plat }}</td>
+                                @else
+                                <td>-</td>
+                                @endif
                                 <td>{{ $row->kategori->items }}</td>
-                                <td>{{ number_format($row->total), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->price), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->price2), 2, '.', '.' }}</td>
                                 @if (Auth::user()->level == 'master')
                                 <td>{{ $row->user->level }}</td>
                                 @endif
@@ -83,9 +107,20 @@
                             </tr>
                         @endforeach
                     <tfoot>
-                        <tr>
+                        {{-- <tr>
                             <th colspan="4" style="text-align:right"></th>
                             <th></th>
+                        </tr> --}}
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col">Total Parkir</th>
+                            <th scope="col">Total Kebersihan</th>
+                            @if (Auth::user()->level == 'master')
+                            <th scope="col"></th>
+                            @endif
                         </tr>
                     </tfoot>
                     </tbody>
@@ -177,14 +212,6 @@
                             'number' ? i : 0;
                     };
 
-                    // Total over all pages
-                    total = api
-                        .column(4)
-                        .data()
-                        .reduce(function(a, b) {
-                            return intVal(a) + intVal(b);
-                        }, 0);
-
                     // Total over this page
                     pageTotal = api
                         .column(4, {
@@ -194,12 +221,23 @@
                         .reduce(function(a, b) {
                             return intVal(a) + intVal(b);
                         }, 0);
-                    
+                    // Total over this page
+                    pageTotal2 = api
+                        .column(5, {
+                            page: 'current'
+                        })
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    // Total over this page
+                 
 
                     // Update footer
                     // $(api.column(4).footer()).html('Total :' + pageTotal);
-                    $(api.column(4).footer()).html('Total : ' + pageTotal);
-                
+                    $(api.column(5).footer()).html('Total Kebersihan: ' + pageTotal2);
+                    $(api.column(4).footer()).html('Total Parkir: ' + pageTotal);
+            
                 },
             });
 

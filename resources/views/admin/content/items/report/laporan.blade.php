@@ -66,6 +66,8 @@
                             <th scope="col">Hari & Tanggal</th>
                             <th scope="col">Plat Kendaraan</th>
                             <th scope="col">Type Kendaraan</th>
+                            <th scope="col">Tarif Parkir</th>
+                            <th scope="col">Tarif Kebersihan</th>
                             <th scope="col">Total Bayar</th>
                         </tr>
                         @foreach ($data as $key => $row)
@@ -75,15 +77,27 @@
                                 <td>{{ $row->created_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
                                 {{-- <td>{{ $row->created_at->isoFormat('D/M/Y, hh:mm') }}</td> --}}
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
+                                @if ($row->plat != null)
                                 <td>{{ $row->plat }}</td>
+                                @else
+                                <td>-</td>
+                                @endif
                                 <td>{{ $row->kategori->items }}</td>
+                                <td>{{ number_format($row->price), 2, '.', '.' }}</td>
+                                <td>{{ number_format($row->price2), 2, '.', '.' }}</td>
                                 <td>{{ number_format($row->total), 2, '.', '.' }}</td>
 
                             </tr>
                         @endforeach
-                       
+                        <tr class="text-center">
+                            <td colspan="4">Rincian Detail (Total Parkir + Kebersihan)</td>
+                            <td>Rp. {{number_format($total_parkir)}},-</td>
+                            <td>Rp. {{number_format($total_kebersihan)}},-</td>
+                            <td></td>
+                        </tr>
                             <tr class="text-center">
-                                <td colspan="4">Nominal Total</td>
+                                <td colspan="6">Nominal Total Keseluruhan</td>
+                              
                                 <td>Rp. {{number_format($sum_total)}},-</td>
                             </tr>
                         

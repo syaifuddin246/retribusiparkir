@@ -39,6 +39,7 @@
                                     <th scope="col">Petugas</th>
                                 @endif
                                 <th scope="col">Hari & Tanggal</th>
+                                
                                 <th scope="col">Plat Kendaraan</th>
                                 {{-- <th scope="col">Image Bus</th> --}}
                                 <th scope="col">Type Kendaraan</th>
@@ -47,13 +48,18 @@
                             </tr>
                         </thead>
                         <tbody style="text-align: center">
+                            @if($data->count())
                             @foreach ($data as $key => $row)
                                 <tr>
                                     @if (Auth::user()->level == 'master')
                                         <td>{{ $row->user->name }}</td>
                                     @endif
                                     <td>{{ $row->updated_at->isoFormat('dddd, D/M/Y, H:mm:ss') }}</td>
+                                    @if ($row->plat != null)
                                     <td>{{ $row->plat }}</td>
+                                    @else
+                                    <td>-</td>
+                                    @endif
                                     {{-- <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
                           height="80px"></td> --}}
                                     <td>{{ $row->kategori->items }}</td>
@@ -68,6 +74,7 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

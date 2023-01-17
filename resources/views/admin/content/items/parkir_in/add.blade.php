@@ -58,7 +58,7 @@
                                     <label for="plat" style="padding: 5px;"><b>No.Polisi</b></label>
                                     <input id="plat" type="text"
                                         class="form-control @error('plat') is-invalid @enderror" name="plat"
-                                        value="{{ old('plat') }}" required autocomplete="plat" required
+                                        value="{{ old('plat') }}" autocomplete="plat"
                                         placeholder="Nopol...">
 
                                     @error('plat')

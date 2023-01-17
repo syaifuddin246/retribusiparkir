@@ -82,7 +82,11 @@
         <hr>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
             <div style="text-align: left; margin-right:65px;">No Polisi</div>
+            @if ($data->plat != null)
             <div>{{$data->plat}}</div>
+            @else
+            <div>-</div>
+            @endif
             <div></div>
         </div>
         <div class="flex-container" style="margin-bottom: 10px; text-align:right;">
