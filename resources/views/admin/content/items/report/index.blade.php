@@ -74,10 +74,12 @@
 
                             <th scope="col">Petugas</th>
                             <th scope="col">Hari & Tanggal</th>
-                            <th scope="col">Plat Kendaraan</th>
+                            {{-- <th scope="col">Plat Kendaraan</th> --}}
                             <th scope="col">Type Kendaraan</th>
-                            <th scope="col">Parkir</th>
-                            <th scope="col">Kebersihan</th>
+                            <th scope="col">Porporasi Pengunjung</th>
+                            <th scope="col">Porporasi Kebersihan</th>
+                            <th scope="col">Retribusi Pengunjung</th>
+                            <th scope="col">Retribusi Kebersihan</th>
                             @if (Auth::user()->level == 'master')
                             <th scope="col">Level Pos Jaga</th>
                             @endif
@@ -92,12 +94,14 @@
                                 <td>{{ $row->created_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
                                 {{-- <td>{{ $row->updated_at->isoFormat('D/M/Y, hh:mm') }}</td> --}}
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
-                                @if ($row->plat != null)
+                                {{-- @if ($row->plat != null)
                                 <td>{{ $row->plat }}</td>
                                 @else
                                 <td>-</td>
-                                @endif
+                                @endif --}}
                                 <td>{{ $row->kategori->items }}</td>
+                                <td>{{ $row->porporasi }}</td>
+                                <td>{{ $row->porporasi_kebersihan }}</td>
                                 <td>{{ number_format($row->price), 2, '.', '.' }}</td>
                                 <td>{{ number_format($row->price2), 2, '.', '.' }}</td>
                                 @if (Auth::user()->level == 'master')
@@ -116,7 +120,8 @@
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col"></th>
-                            <th scope="col">Total Parkir</th>
+                            <th scope="col"></th>
+                            <th scope="col">Total Pengunjung</th>
                             <th scope="col">Total Kebersihan</th>
                             @if (Auth::user()->level == 'master')
                             <th scope="col"></th>
@@ -214,7 +219,7 @@
 
                     // Total over this page
                     pageTotal = api
-                        .column(4, {
+                        .column(5, {
                             page: 'current'
                         })
                         .data()
@@ -223,7 +228,7 @@
                         }, 0);
                     // Total over this page
                     pageTotal2 = api
-                        .column(5, {
+                        .column(6, {
                             page: 'current'
                         })
                         .data()
@@ -235,8 +240,8 @@
 
                     // Update footer
                     // $(api.column(4).footer()).html('Total :' + pageTotal);
-                    $(api.column(5).footer()).html('Total Kebersihan: ' + pageTotal2);
-                    $(api.column(4).footer()).html('Total Parkir: ' + pageTotal);
+                    $(api.column(6).footer()).html('Total Kebersihan: ' + pageTotal2);
+                    $(api.column(5).footer()).html('Total Pengunjung: ' + pageTotal);
             
                 },
             });

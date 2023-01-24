@@ -50,7 +50,7 @@
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
                                         data-target="#allparkir" aria-expanded="true" aria-controls="collapseOne">
-                                        Grafik All Retribusi Parkir /Tahun @foreach ($th_income as $tahun)
+                                        Grafik All Retribusi Wisata /Tahun @foreach ($th_income as $tahun)
                                             {{ $tahun->thn }}
                                         @endforeach
                                     </button>
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card">
+                        {{-- <div class="card">
                             <div class="card-header" id="headingTwo">
                                 <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left collapsed" type="button"
@@ -101,7 +101,7 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                     {{-- <div id="grafik">
 
@@ -151,14 +151,14 @@
 
         Highcharts.chart('grafik', {
             title: {
-                text: 'Grafik Pendapatan Bulanan All Parkir'
+                text: 'Grafik Bulanan All Retribusi Wisata Demak '
             },
             xAxis: {
                 categories: bulan
             },
             yAxis: {
                 title: {
-                    text: 'Nominal Pendapatan Bulanan'
+                    text: 'Nominal Bulanan'
                 }
             },
             plotOptions: {

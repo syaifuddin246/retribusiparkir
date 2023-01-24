@@ -15,6 +15,7 @@ class AddColumsToParkirInTable extends Migration
     {
         Schema::table('parkir_in', function (Blueprint $table) {
             //
+            $table->string('porporasi_kebersihan')->after('porporasi')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AddColumsToParkirInTable extends Migration
     {
         Schema::table('parkir_in', function (Blueprint $table) {
             //
+            $table->dropColumn('porporasi_kebersihan');
         });
     }
 }

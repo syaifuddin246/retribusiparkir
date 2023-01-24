@@ -20,10 +20,10 @@ class ReportController extends Controller
         
         // $kategori = KategoriItem::all();
         if (Auth::user()->level == 'master'){
-            $data = ParkirIn::all();
+            $data = ParkirIn::latest()->get();
         }else{
             // $data = ParkirIn::all()->where('user_id',Auth::user()->id);
-            $data = ParkirIn::select('*')->where('user_id',Auth::user()->id)->get();
+            $data = ParkirIn::latest()->where('user_id',Auth::user()->id)->get();
         }
         // if (request()->start_date || request()->end_date) {
         //     $start_date = Carbon::parse(request()->start_date)->toDateTimeString();

@@ -22,13 +22,15 @@ class ParkirInController extends Controller
         //
         $kategori = KategoriItem::all();
         if (Auth::user()->level == 'master'){
-            $data = ParkirIn::select('*')->latest()->paginate(8);
+            $data = ParkirIn::select('*')->latest()->paginate();
         }
         if (Auth::user()->level == 'admintembiring'){
-            $data = ParkTembiring::select('*')->where('user_id',Auth::user()->id)->latest()->paginate(8);
+            $data = ParkirIn::select('*')->where('user_id',Auth::user()->id)->latest()->paginate();
+            // $data = ParkTembiring::select('*')->where('user_id',Auth::user()->id)->latest()->paginate();
         }
         if (Auth::user()->level == 'adminkadilangu'){
-            $data = ParkKadilangu::select('*')->where('user_id',Auth::user()->id)->latest()->paginate(8);
+            $data = ParkirIn::select('*')->where('user_id',Auth::user()->id)->latest()->paginate();
+            // $data = ParkKadilangu::select('*')->where('user_id',Auth::user()->id)->latest()->paginate();
         }
         
 
@@ -57,9 +59,63 @@ class ParkirInController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'kategori' => 'required',
+            'fields.*.kategori' => 'required',
+        ],[
+            'fields.*.kategori.required' => 'Tipe Kendaraan harus diisi'
         ]);
+        $arr = [];
+        $arrTotal = [];
+        foreach ($request->fields as $key => $value) {
+            $arrInd = [];
+            $arrPorp = [];
+            $arrPorpKebersihan = [];
+            $kat = KategoriItem::whereId($value["kategori"])->first();
+            $kendaraan = $kat->items;
+            $retribusi = (int)$kat->price;
+            $kebersihan = (int)$kat->price2;
+            $total = $retribusi + $kebersihan;
+            
+            for ($i=0; $i < $value["jumlah"]; $i++) {
+                $porporasi = $value["porporasi"]++;
+                $lead_zero_porporasi = sprintf("%06d", $porporasi);
+                array_push($arrPorp, $lead_zero_porporasi);
+                $porporasi_kebersihan = $value["porporasi_kebersihan"]++;
+                $lead_zero_porporasi_kebersihan = sprintf("%06d", $porporasi_kebersihan);
+                array_push($arrPorpKebersihan, $lead_zero_porporasi_kebersihan);
+                $data = ParkirIn::create([
+                    'user_id' => Auth::user()->id,
+                    'kategori_item_id' => $value["kategori"],
+                    // 'plat' => $request->plat,
+                    'price' => $retribusi,
+                    'price2' => $kebersihan,
+                    'total' => $total,
+                    // 'status' => $request->status,
+                    'rombongan' => $request->rombongan,
+                    'porporasi' => $lead_zero_porporasi,
+                    'porporasi_kebersihan' => $lead_zero_porporasi_kebersihan,
+                ])->id;
+            }
+            $arrInd["tipe"] = $kendaraan;
+            $arrInd["retribusi"] = $retribusi;
+            $arrInd["kebersihan"] = $kebersihan;
+            $arrInd["jumlah"] = (int)$value["jumlah"];
+            $arrInd["porporasi"] = $arrPorp;
+            $arrInd["porporasi_kebersihan"] = $arrPorpKebersihan;
+            array_push($arr, $arrInd);
+            array_push($arrTotal, $total * (int)$value["jumlah"]);
+            // echo "<br>";
+        }
+        $total = array_sum($arrTotal);
+        $rombongan = $request->rombongan;
+        $petugas = Auth::user()->name;
+        $tanggal = date(now());
+        // dd($arr);
+        return view('admin.content.items.parkir_in.invoiceMulti',compact('arr', 'petugas', 'rombongan', 'tanggal', 'total'));
+        // $request->validate([
+        //     'kategori' => 'required',
+        // ]);
         // $img = $request->image;
         // $folderPath = "public/content/parkir_img/";
         
@@ -82,50 +138,50 @@ class ParkirInController extends Controller
         //     'status' => $request->status,
         //     'image' => $fileName,
         // ]);
-        $data = ParkirIn::create([
-            'user_id' => Auth::user()->id,
-            'kategori_item_id' => $request->kategori,
-            'plat' => $request->plat,
-            'price' => $request->price,
-            'price2' => $request->price2,
-            'total' => $request->total,
-            'status' => $request->status,
-            'rombongan' => $request->rombongan,
-            'porporasi' => $request->porporasi,
-            // 'image' => $fileName,
-        ])->id;
-        if(Auth::user()->level == 'admintembiring'){
-            $data = ParkTembiring::create([
-                'user_id' => Auth::user()->id,
-                'kategori_item_id' => $request->kategori,
-                'plat' => $request->plat,
-                'price' => $request->price,
-                'price2' => $request->price2,
-                'total' => $request->total,
-                'status' => $request->status,
-                'rombongan' => $request->rombongan,
-                'porporasi' => $request->porporasi,
-                // 'image' => $fileName,
-            ])->id;
-        }elseif(Auth::user()->level == 'adminkadilangu'){
-            $data = ParkKadilangu::create([
-                'user_id' => Auth::user()->id,
-                'kategori_item_id' => $request->kategori,
-                'plat' => $request->plat,
-                'price' => $request->price,
-                'price2' => $request->price2,
-                'total' => $request->total,
-                'status' => $request->status,
-                'rombongan' => $request->rombongan,
-                'porporasi' => $request->porporasi,
-                // 'image' => $fileName,
-            ])->id;
-        }else{
-            dd('notfound');
-        }
+        // $data = ParkirIn::create([
+        //     'user_id' => Auth::user()->id,
+        //     'kategori_item_id' => $request->kategori,
+        //     'plat' => $request->plat,
+        //     'price' => $request->price,
+        //     'price2' => $request->price2,
+        //     'total' => $request->total,
+        //     'status' => $request->status,
+        //     'rombongan' => $request->rombongan,
+        //     'porporasi' => $request->porporasi,
+        //     // 'image' => $fileName,
+        // ])->id;
+        // if(Auth::user()->level == 'admintembiring'){
+        //     $data = ParkTembiring::create([
+        //         'user_id' => Auth::user()->id,
+        //         'kategori_item_id' => $request->kategori,
+        //         'plat' => $request->plat,
+        //         'price' => $request->price,
+        //         'price2' => $request->price2,
+        //         'total' => $request->total,
+        //         'status' => $request->status,
+        //         'rombongan' => $request->rombongan,
+        //         'porporasi' => $request->porporasi,
+        //         // 'image' => $fileName,
+        //     ])->id;
+        // }elseif(Auth::user()->level == 'adminkadilangu'){
+        //     $data = ParkKadilangu::create([
+        //         'user_id' => Auth::user()->id,
+        //         'kategori_item_id' => $request->kategori,
+        //         'plat' => $request->plat,
+        //         'price' => $request->price,
+        //         'price2' => $request->price2,
+        //         'total' => $request->total,
+        //         'status' => $request->status,
+        //         'rombongan' => $request->rombongan,
+        //         'porporasi' => $request->porporasi,
+        //         // 'image' => $fileName,
+        //     ])->id;
+        // }else{
+        //     dd('notfound');
+        // }
 
-        $id = $data;
-        return redirect('/admin/parkir_in/'. $id);
+        // $id = $data;
+        // return redirect('/admin/parkir_in/'. $id);
         // return redirect('/admin/parkir_in')->with('message','Data Berhasil Disimpan');
     }
 

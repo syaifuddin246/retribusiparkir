@@ -5,7 +5,7 @@
 
         <div class="sidebar-brand-text mx-3">
             {{-- <img src="{{asset('Tempo/assets/img/icon.png')}}" alt="" class="img-fluid"> --}}
-            <p>Parkir-App</p>
+            <p> Retribusi Wisata Demak</p>
         </div>
     </a>
 
@@ -53,14 +53,14 @@
     @if (Auth::user()->level == 'adminkadilangu' || Auth::user()->level == 'admintembiring')
         <!-- Heading -->
         <div class="sidebar-heading">
-            Parkir-App
+            Retribusi Wisata Demak
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link @yield('parkir-in')" href="{{ url('admin/parkir_in/create') }}">
                 <i class="fas fa-car-side"></i>
-                <span>Parkir Masuk</span></a>
+                <span>Retribusi Wisata</span></a>
         </li>
         
         @endif

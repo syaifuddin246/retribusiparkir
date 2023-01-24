@@ -64,11 +64,13 @@
 
                             <th scope="col">Petugas</th>
                             <th scope="col">Hari & Tanggal</th>
-                            <th scope="col">Plat Kendaraan</th>
+                            {{-- <th scope="col">Plat Kendaraan</th> --}}
                             <th scope="col">Type Kendaraan</th>
-                            <th scope="col">Tarif Parkir</th>
-                            <th scope="col">Tarif Kebersihan</th>
-                            <th scope="col">Total Bayar</th>
+                            <th scope="col">Porporasi Pengunjung</th>
+                            <th scope="col">Porporasi Kebersihan</th>
+                            <th scope="col">Retribusi Kunjungan</th>
+                            <th scope="col">Retribusi Kebersihan</th>
+                            <th scope="col">Nominal Total Retribusi</th>
                         </tr>
                         @foreach ($data as $key => $row)
                             <tr style="text-align: center">
@@ -77,12 +79,14 @@
                                 <td>{{ $row->created_at->isoFormat('dddd, D/M/Y, hh:mm') }}</td>
                                 {{-- <td>{{ $row->created_at->isoFormat('D/M/Y, hh:mm') }}</td> --}}
                                 {{-- <td>{{ $row->updated_at}}</td> --}}
-                                @if ($row->plat != null)
+                                {{-- @if ($row->plat != null)
                                 <td>{{ $row->plat }}</td>
                                 @else
                                 <td>-</td>
-                                @endif
+                                @endif --}}
                                 <td>{{ $row->kategori->items }}</td>
+                                <td>{{$row->porporasi}}</td>
+                                <td>{{$row->porporasi_kebersihan}}</td>
                                 <td>{{ number_format($row->price), 2, '.', '.' }}</td>
                                 <td>{{ number_format($row->price2), 2, '.', '.' }}</td>
                                 <td>{{ number_format($row->total), 2, '.', '.' }}</td>
@@ -90,13 +94,13 @@
                             </tr>
                         @endforeach
                         <tr class="text-center">
-                            <td colspan="4">Rincian Detail (Total Parkir + Kebersihan)</td>
+                            <td colspan="5">Rincian Detail (Total Retribusi Pengunjung + Kebersihan)</td>
                             <td>Rp. {{number_format($total_parkir)}},-</td>
                             <td>Rp. {{number_format($total_kebersihan)}},-</td>
                             <td></td>
                         </tr>
                             <tr class="text-center">
-                                <td colspan="6">Nominal Total Keseluruhan</td>
+                                <td colspan="7">Nominal Total Keseluruhan Retribusi</td>
                               
                                 <td>Rp. {{number_format($sum_total)}},-</td>
                             </tr>

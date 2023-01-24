@@ -47,10 +47,13 @@
                                             <th scope="col">Petugas</th>
                                         @endif
                                         <th scope="col">Hari & Tanggal</th>
-                                        <th scope="col">Plat Kendaraan</th>
+                                        <th scope="col">Asal Rombongan</th>
+                                        {{-- <th scope="col">Plat Kendaraan</th> --}}
                                         {{-- <th scope="col">Image Bus</th> --}}
                                         <th scope="col">Type Kendaraan</th>
-                                        <th scope="col">Total Bayar</th>
+                                        <th scope="col">Porporasi Pengunjung</th>
+                                        <th scope="col">Porporasi Kebersihan</th>
+                                        <th scope="col">Nominal Total</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -61,10 +64,13 @@
                                                 <td>{{ $row->user->name }}</td>
                                             @endif
                                             <td>{{ $row->updated_at->isoFormat('dddd, D/M/Y, H:mm:ss') }}</td>
-                                            <td>{{ $row->plat }}</td>
+                                            <td>{{ $row->rombongan }}</td>
+                                            {{-- <td>{{ $row->plat }}</td> --}}
                                             {{-- <td><img src="{{ asset('storage/content/parkir_img/' . $row->image) }}" width="100px"
                                   height="80px"></td> --}}
                                             <td>{{ $row->kategori->items }}</td>
+                                            <td>{{ $row->porporasi }}</td>
+                                            <td>{{ $row->porporasi_kebersihan }}</td>
                                             <td>Rp.{{ number_format($row->total), 2, '.', '.' }}</td>
                                             <td>
                                                 <div class="btn-group" role="group" aria-label="Basic-example">
